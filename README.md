@@ -4,5 +4,5 @@
 _Neistinn_ (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb and object. The app generates a sentence in English that has to be translated into Icelandic.
 
 Todo:
-- [ ] s
+- [ ] showing 
 - [ ] a

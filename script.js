@@ -107,6 +107,9 @@ const dictobj = [
 ["a dish", "rétt", "acc", "adj", ["íslenskan", "franskan", "ítalskan", "góðan", "sterkan"], ["Icelandic", "French", "Italian", "good", "spicy"], 36],
 ["the juice", "safann", "acc", 37],
 ["juice", "safa", "acc", 38],
+["water", "vatn", "acc", 39],
+["the cat", "köttinn", "acc", "adj", ["hvíta", "svarta", "brúna", "gráa"], ["white", "black", "brown", "gray"], 40],
+["a cat", "köttinn", "acc", "adj", ["hvítan", "svartan", "brúnan", "gráan"], ["white", "black", "brown", "gray"], 41],
 ];
 
 let randIndex1;

@@ -61,7 +61,7 @@ const arrayv = [
 ["sakna", "saknar", "saknar", "söknum", "saknið", "sakna"],
 ["horfi á", "horfir á", "horfir á", "horfum á", "horfið á", "horfa á"],
 ["elda", "eldar", "eldar", "eldum", "eldið", "elda"],
-["geymdi", "geymdir", "geymdir", "geymdum", "geymduð", "geymdu"],
+["geymdi", "geymdir", "geymdi", "geymdum", "geymduð", "geymdu"],
 ["tók", "tókst", "tók", "tókum", "tókuð", "tóku"],
 ["borðaði", "borðaðir", "borðaði", "borðuðum", "borðuðuð", "borðuðu"],
 ["drakk", "drakkst", "drakk", "drukkum", "drukkuð", "drukku"],

@@ -17,6 +17,16 @@ h1 {
     padding: 0px 0px 0px 0px;
 }
 
+#sbroc td {
+width: 210px;
+border: none;
+text-align: left;
+}
+
+#sbroc td p {
+font-size: 19px;
+}
+
 hr {
     border: 0;
     clear:both;

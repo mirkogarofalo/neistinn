@@ -2,7 +2,6 @@
 <html>
 <head>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 <div class="containerx">
@@ -13,12 +12,14 @@
 <p align=center><button id="gener" onclick="generate()">Generate a sentence</button> <button id="verif" onclick="verif()" disabled>Verify</button></p></div>
 <div class="side" id="textchron">
 <div id="about" style="display:none"><h2>About</h2><p class="parag"><img id="mig" src="mig.jpg">Mirko Garofalo is an adjunct lecturer at the University of Iceland and a Doctor in Icelandic linguistics. His main field of interest is syntax, language technology and L2 acquisition, in particular in relation to Icelandic. Mirko has been teaching Icelandic as a second language at beginner, intermediate and advanced level for over a decade at the University of Iceland.</p><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
-<div id="info" style="display:none"><h2>Instructions</h2><p class="parag"><i>Neistinn</i> (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb and object. The app generates a sentence in English that has to be translated into Icelandic.<br><br>To start, click on the button <i>Generate a sentence</i>. A randomized subject, main verb and object will appear. The user can also ask the generator to add an adjective to the subject or the object when the button <i>+adj</i> appears. At that point, the user can type in the text boxes the correct Icelandic translation of the subject, the verb and the object and click on <i>Verify</i> to check whether the answer given is correct.<br><br>The items correctly translated will be marked in green and the incorrect ones in red. If no answer is given, the items will be marked in blue. The examples previously generated will be displayed on the side panel. The previous examples where the translation into Icelandic was incorrect are marked in red.</p><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
+<div id="info" style="display:none"><h2>Instructions</h2><p class="parag"><i>Neistinn</i> (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb and object. The app generates a sentence in English that has to be translated into Icelandic. The list of the vocabulary used in this application can be consulted by clicking on <i>Vocabulary</i>.<br><br>To start, click on the button <i>Generate a sentence</i>. A randomized subject, main verb and object will appear. The user can also ask the generator to add an adjective to the subject or the object when the button <i>+adj</i> appears. At that point, the user can type in the text boxes the correct Icelandic translation of the subject, the verb and the object and click on <i>Verify</i> to check whether the answer given is correct.<br><br>The items correctly translated will be marked in green and the incorrect ones in red. If no answer is given, the items will be marked in blue. The examples previously generated will be displayed on the side panel. The previous examples where the translation into Icelandic was incorrect are marked in red.</p><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
+<div id="vocablistside" style="display:none"><h2>Vocabulary list</h2><table id="sbroc"></table><br><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
 <div id="previous"> <h2 id="tit">Previous sentences</h2>
 <table id="chron"><tbody></tbody></table></div></div></div>
 <div class="containerx">
-<div class="container"><table><tbody><tr><td><p>© Mirko Garofalo 2026 (mig@hi.is) - Ver. 1.0</p></td><td><p class="links" onclick="showinfo()" align=right>Instructions</p></td><td><p class="links" onclick="showabout()" align=right>About</p></td></tr></tbody></table></div>
+<div class="container"><table><tbody><tr><td><p>© Mirko Garofalo 2026 (mig@hi.is) - Ver. 1.0</p></td><td><p class="links" onclick="showvocab()" align=center>Vocabulary</p></td><td><p class="links" onclick="showabout()" align=right>About</p></td><td><p class="links" onclick="showinfo()" align=right>Instructions</p></td></tr></tbody></table></div>
 <div class="side"><table><tr><td><p id="totcount">Correct sentences: </p></td></tr></table></div></div>
+<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
 

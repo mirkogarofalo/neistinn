@@ -21,95 +21,111 @@ const dictsubj = [
 ["They (m)", "þeir", 5, "x"],
 ["They (f)", "þær", 5, "x"],
 ["They (n)", "þau", 5, "x"],
-["The doctor", "læknirinn", 2, "adj", ["góði", "nýi", "gamli", "frægi"], ["good", "new", "old", "famous"]],
-["A doctor", "læknir", 2, "adj", ["góður", "nýr", "gamall", "frægur"], ["good", "new", "old", "famous"], "x"],
-["The actress", "leikkonan", 2, "adj", ["góða", "skemmtilega", "fræga"], ["good", "fun", "famous"]],
-["An actress", "leikkona", 2, "adj", ["góð", "skemmtileg", "fræg"], ["good", "fun", "famous"], "x"],
-["The teacher", "kennarinn", 2, "adj", ["góði", "nýi"], ["good", "new"]],
-["The teachers", "kennararnir", 5, "adj", ["góðu", "nýju"], ["good", "new"]],
-["The man", "maðurinn", 2, "adj", ["góði", "skemmtilegi", "gamli"], ["good", "fun", "old"]],
-["A teacher", "kennari", 2, "adj", ["góður", "nýr"], ["good", "new"], "x"],
-["A man", "maður", 2, "adj", ["góður", "skemmtilegur", "gamall"], ["good", "fun", "old"], "x"],
-["A girl", "stelpa", 2, "adj", ["góð", "íslensk", "frönsk", "ítölsk", "lítil"], ["good", "Icelandic", "French", "Italian", "little"], "x"],
-["Someone", "einhver", 2, "x"],
+["The student", "nemandinn", 2, "adj", ["íslenski", "nýi"], ["Icelandic", "new"]],
+["A student", "nemandi", 2, "adj", ["íslenskur", "nýr"], ["Icelandic", "new"], "x"],
+["The teacher", "kennarinn", 2, "adj", ["gamli", "ljóshærði", "dökkhærði", "nýi"], ["old", "blonde", "dark-haired", "new"]],
+["A teacher", "kennari", 2, "adj", ["gamall", "ljóshærður", "dökkhærður"], ["old", "blonde", "dark-haired"], "x"],
+["The tourist", "ferðamaðurinn", 2, "adj", ["franski", "ungi"], ["French", "young"]],
+["Tourists", "ferðamenn", 5],
+["The tourists", "ferðamennirnir", 5, "adj", ["ungu", "bandarísku"], ["young", "American"]],
+["A tourist", "ferðamaður", 2, "adj", ["franskur", "ungur"], ["French", "young"], "x"],
+["A tourist", "ferðamaður", 2, "adj", ["franskur", "ungur"], ["French", "young"], "x"],
+["Your mum", "mamma þín", 2],
+["Your dad", "pabbi þinn", 2],
+["Your sister", "systir þín", 2],
+["Your brother", "bróðir þinn", 2],
 ];
 const dictverb = [
-["store", "stores", 0, [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 26, 27, 28, 29] ],
-["take", "takes", 1, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 26, 27, 28, 29] ],
-["eat", "eats", 2, [5, 6, 7, 8, 14, 15, 16, 17, 35] ],
-["drink", "drinks", 3, [12, 13, 37, 38]],
-["play", "plays", 4, [18, 19, 20, 21] ],
-["read", "reads", 5, [8, 9, 10, 11] ],
-["help", "helps", 6, [22, 23, 24, 25] ],
-["miss", "misses", 7, [30, 31] ],
-["watch", "watches", 8, [18, 19, 20, 21, 32, 33, 34] ],
-["cook", "cooks", 9, [35, 36] ],
-["stored", "stored", 10, [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 26, 27, 28, 29] ],
-["took", "took", 11, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 26, 27, 28, 29] ],
-["ate", "ate", 12, [5, 6, 7, 8, 14, 15, 16, 17, 35] ],
-["drank", "drank", 13, [12, 13, 37, 38]],
+["assist", "assists", 0, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40]],
+["help", "helps", 1, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41]],
+["miss", "misses", 2, [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]],
+["see", "sees", 3, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 30, 31, 36, 37]],
+["follow", "follows", 4, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 32, 33, 38, 39]],
+["study", "studies", 5, [34, 35]],
+["eat", "eats", 6, [42, 43, 44, 45]],
+["drink", "drinks", 7, [46, 47, 48, 49, 50]],
+["watch", "watches", 8, [51, 52, 53]],
+["paint", "paints", 9, [54, 55]],
+["buy", "buys", 10, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59]],
+["sell", "sells", 11, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59]],
 ];
 
 const arrayv = [
-["geymi", "geymir", "geymir", "geymum", "geymið", "geyma", "n"],
-["tek", "tekur", "tekur", "tökum", "takið", "taka", "n"],
-["borða", "borðar", "borðar", "borðum", "borðið", "borða", "n"],
-["drekk", "drekkur", "drekkur", "drekkum", "drekkið", "drekka", "n"],
-["spila", "spilar", "spilar", "spilum", "spilið", "spila", "n"],
-["les", "lest", "les", "lesum", "lesið", "lesa", "n"],
+["aðstoða", "aðstoðar", "aðstoðar", "aðstoðum", "aðstoðið", "aðstoða", "n"],
 ["hjálpa", "hjálpar", "hjálpar", "hjálpum", "hjálpið", "hjálpa", "n"],
 ["sakna", "saknar", "saknar", "söknum", "saknið", "sakna", "n"],
+["sé", "sérð", "sér", "sjáum", "sjáið", "sjá", "n"],
+["fylgi", "fylgir", "fylgir", "fylgjum", "fylgið", "fylgja", "n"],
+["læri", "lærir", "lærir", "lærum", "lærið", "læra", "n"],
+["borða", "borðar", "borðar", "borðum", "borðið", "borða", "n"],
+["drekk", "drekkur", "drekkur", "drekkum", "drekkið", "drekka", "n"],
 ["horfi á", "horfir á", "horfir á", "horfum á", "horfið á", "horfa á", "n"],
-["elda", "eldar", "eldar", "eldum", "eldið", "elda", "n"],
-["geymdi", "geymdir", "geymdi", "geymdum", "geymduð", "geymdu"],
-["tók", "tókst", "tók", "tókum", "tókuð", "tóku"],
-["borðaði", "borðaðir", "borðaði", "borðuðum", "borðuðuð", "borðuðu"],
-["drakk", "drakkst", "drakk", "drukkum", "drukkuð", "drukku"],
+["mála", "málar", "málar", "málum", "málið", "mála", "n"],
+["kaupi", "kaupir", "kaupir", "kaupum", "kaupið", "kaupa", "n"],
+["sel", "selur", "selur", "seljum", "seljið", "selja", "n"],
 ];
 
 const dictobj = [
-["the dog", "hundinn", "acc", "adj", ["hvíta", "svarta", "stóra", "brúna"], ["white", "black", "big", "brown"], 0],
-["the dogs", "hundana", "acc", "adj", ["hvítu", "svörtu", "stóru", "brúnu"], ["white", "black", "big", "brown"], 1],
-["a dog", "hund", "acc", "adj", ["hvítan", "svartan", "stóran", "brúnan"], ["white", "black", "big", "brown"], 2, "hundur"],
-["dogs", "hunda", "acc", 3],
-["the horse", "hestinn", "acc", "adj", ["hvíta", "svarta", "stóra"], ["white", "black", "big"], 4],
-["the horses", "hestana", "acc", 5],
-["a horse", "hest", "acc", 6, "hestur"],
-["horses", "hesta", "acc", 7],
-["the book", "bókina", "acc", 8],
-["the books", "bækurnar", "acc", 9],
-["a book", "bók", "acc", "adj", ["hvíta", "svarta", "stóra", "nýja"], ["white", "black", "big", "new"], 10, "bók"],
-["books", "bækur", "acc", "adj", ["hvítar", "svartar", "stórar", "nýjar"], ["white", "black", "big", "new"], 11],
-["the milk", "mjólkina", "acc", 12],
-["milk", "mjólk", "acc", 13, "mjólk"],
-["the sandwich", "samlokuna", "acc", 14],
-["the sandwiches", "samlokurnar", "acc", 15],
-["a sandwich", "samloku", "acc", 16, "samloka"],
-["sandwiches", "samlokur", "acc", 17],
-["the video", "myndbandið", "acc", "adj", ["hræðilega", "skemmtilega", "langa", "nýja"], ["horrible", "fun", "long", "new"], 18],
-["the videos", "myndböndin", "acc", "adj", ["hræðilegu", "skemmtilegu", "löngu", "nýju"], ["horrible", "fun", "long", "new"], 19],
-["a video", "myndband", "acc", 20, "myndband"],
-["videos", "myndbönd", "acc", 21],
-["the girl", "stelpunni", "dat", 22],
-["the girls", "stelpunum", "dat", 23],
-["a girl", "stelpu", "dat", 24],
-["girls", "stelpum", "dat", 25],
-["the picture", "myndina", "acc", 26],
-["the pictures", "myndirnar", "acc", 27],
-["a picture", "mynd", "acc", 28, "mynd"],
-["pictures", "myndir", "acc", 29],
-["the family", "fjölskyldunnar", "gen", 30, "fjölskylda"],
-["the horses", "hestanna", "gen", 31],
-["the TV", "sjónvarpið", "acc", 32, "sjónvarp"],
-["the movie", "bíómyndina", "acc", "adj", ["hræðilegu", "skemmtilegu", "löngu", "nýju", "spennandi"], ["horrible", "fun", "long", "new", "exciting"], 33],
-["a movie", "bíómynd", "acc", "adj", ["hræðilega", "skemmtilega", "langa", "nýja", "spennandi"], ["horrible", "fun", "long", "new", "exciting"], 34, "bíómynd"],
-["food", "mat", "acc", "adj", ["íslenskan", "franskan", "ítalskan", "góðan", "sterkan"], ["Icelandic", "French", "Italian", "good", "spicy"], 35, "matur"],
-["a dish", "rétt", "acc", "adj", ["íslenskan", "franskan", "ítalskan", "góðan", "sterkan"], ["Icelandic", "French", "Italian", "good", "spicy"], 36, "réttur"],
-["the juice", "safann", "acc", 37],
-["juice", "safa", "acc", 38, "safi"],
-["water", "vatn", "acc", 39, "vatn"],
-["the cat", "köttinn", "acc", "adj", ["hvíta", "svarta", "brúna", "gráa"], ["white", "black", "brown", "gray"], 40],
-["a cat", "köttinn", "acc", "adj", ["hvítan", "svartan", "brúnan", "gráan"], ["white", "black", "brown", "gray"], 41, "köttur"],
+["me", "mig", "acc", 0],
+["you", "þig", "acc", 1],
+["him", "hann", "acc", 2],
+["her", "hana", "acc", 3],
+["it", "það", "acc", 4],
+["us", "okkur", "acc", 5],
+["you (pl)", "ykkur", "acc", 6],
+["them (m)", "þá", "acc", 7],
+["them (f)", "þær", "acc", 8],
+["them (n)", "þau", "acc", 9],
+["me", "mér", "dat", 10],
+["you", "þér", "dat", 11],
+["him", "honum", "dat", 12],
+["her", "henni", "dat", 13],
+["it", "því", "dat", 14],
+["us", "okkur", "dat", 15],
+["you (pl)", "ykkur", "dat", 16],
+["them (m)", "þeim", "dat", 17],
+["them (f)", "þeim", "dat", 18],
+["them (n)", "þeim", "dat", 19],
+["me", "mín", "gen", 20],
+["you", "þín", "gen", 21],
+["him", "hans", "gen", 22],
+["her", "hennar", "gen", 23],
+["it", "þess", "gen", 24],
+["us", "okkar", "gen", 25],
+["you (pl)", "ykkar", "gen", 26],
+["them (m)", "þeirra", "gen", 27],
+["them (f)", "þeirra", "gen", 28],
+["them (n)", "þeirra", "gen", 29],
+["the dog", "hundinn", "acc", "adj", ["hvíta", "svarta", "stóra", "brúna"], ["white", "black", "big", "brown"], 30],
+["a dog", "hund", "acc", "adj", ["hvítan", "svartan", "stóran", "brúnan"], ["white", "black", "big", "brown"], 31, "hundur"],
+["the dog", "hundinum", "dat", "adj", ["hvíta", "svarta", "stóra", "brúna"], ["white", "black", "big", "brown"], 32],
+["a dog", "hundi", "dat", "adj", ["hvítum", "svörtum", "stórum", "brúnum"], ["white", "black", "big", "brown"], 33],
+["grammar", "málfræði", "acc", 34, "málfræði"],
+["English", "ensku", "acc", 35, "enska"],
+["the girl", "stelpuna", "acc", "adj", ["ljóshærðu", "hávöxnu"], ["blonde", "tall"], 36],
+["a girl", "stelpu", "acc", "adj", ["ljóshærða", "hávaxna"], ["blonde", "tall"], 37, "stelpa"],
+["the girl", "stelpunni", "dat", "adj", ["ljóshærðu", "hávöxnu"], ["blonde", "tall"], 38],
+["a girl", "stelpu", "dat", "adj", ["ljóshærðri", "hávaxinni"], ["blonde", "tall"], 39],
+["people", "fólk", "acc", 40, "fólk"],
+["people", "fólki", "dat", 41],
+["the sandwich", "samlokuna", "acc", 42],
+["a sandwich", "samloku", "acc", 43, "samloka"],
+["the chicken", "kjúklinginn", "acc", 44],
+["chicken", "kjúkling", "acc", 45, "kjúklingur"],
+["water", "vatn", "acc", 46, "vatn"],
+["juice", "safa", "acc", 47, "safi"],
+["beer", "bjór", "acc", 48, "bjór"],
+["wine", "vín", "acc", 49, "vín"],
+["coffee", "kaffi", "acc", 50, "kaffi"],
+["the movie", "bíómyndina", "acc", "adj", ["nýju", "vinsælu", "leiðinlegu"], ["new", "popular", "boring"], 51],
+["a movie", "bíómynd", "acc", "adj", ["nýja", "vinsæla", "leiðinlega"], ["new", "popular", "boring"], 52, "bíómynd"],
+["movies", "bíómyndir", "acc", "adj", ["rómantískar", "vinsælar", "leiðinlegar"], ["romantic", "popular", "boring"], 53],
+["the picture", "myndina", "acc", 54],
+["a picture", "mynd", "acc", "adj", ["fallega", "nýja"], ["beautiful", "new"], 55, "mynd"],
+["a book", "bók", "acc", "adj", ["gamla", "þykka"], ["old", "thick"], 56, "bók"],
+["the book", "bókina", "acc", "adj", ["gömlu", "þykku"], ["old", "thick"], 57],
+["books", "bækur", "acc", "adj", ["gamlar", "nýjar"], ["old", "new"], 58],
+["the books", "bækurnar", "acc", "adj", ["gömlu", "nýju"], ["old", "new"], 59],
 ];
 
 let randIndex1;
@@ -133,7 +149,7 @@ let trim4;
 let adjoice;
 let varbut1;
 let varbut2;
-const vocabularylist = [["good", "góður", "adjective"],["new", "nýr", "adjective"],["old", "gamall", "adjective"],["famous", "frægur", "adjective"],["fun", "skemmtilegur", "adjective"],["black", "svartur", "adjective"],["white", "hvítur", "adjective"],["gray", "grár", "adjective"],["brown", "brúnn", "adjective"], ["French", "franskur", "adjective"],["Italian", "ítalskur", "adjective"], ["Little", "lítill", "adjective"],["horrible", "hræðilegur", "adjective"],["big", "stór", "adjective"],["spicy", "sterkur", "adjective"],["long", "langur", "adjective"],["spennandi", "exciting", "adjective"],["Icelandic", "íslenskur", "adjective"]];
+const vocabularylist = [["Icelandic", "íslenskur", "adjective"], ["new", "nýr", "adjective"],["old", "gamall", "adjective"],["blonde", "ljóshærður", "adjective"],["dark-haired", "dökkhærður", "adjective"],["French", "franskur", "adjective"],["young", "ungur", "adjective"],["white", "hvítur", "adjective"],["black", "svartur", "adjective"],["brown", "brúnn", "adjective"],["big", "stór", "adjective"],["tall", "hávaxinn", "adjective"],["popular", "vinsæll", "adjective"],["boring", "leiðinlegur", "adjective"],["beautiful", "fallegur", "adjective"],["romantic", "rómantískur", "adjective"],["thick", "þykkur", "adjective"],["American", "bandarískur", "adjective"],["dad", "pabbi", "noun"],["mum", "mamma", "noun"],["sister", "systir", "noun"],["brother", "bróðir", "noun"]];
 
 genvocab();
 
@@ -467,6 +483,15 @@ document.getElementById("info").style.display = "block";
 document.getElementById("about").style.display = "none";
 document.getElementById("previous").style.display = "none";
 document.getElementById("vocablistside").style.display = "none";
+document.getElementById("settings").style.display = "none";
+}
+
+function showsett() {
+    document.getElementById("info").style.display = "none";
+    document.getElementById("about").style.display = "none";
+    document.getElementById("previous").style.display = "none";
+    document.getElementById("vocablistside").style.display = "none";
+    document.getElementById("settings").style.display = "block";
 }
 
 function showvocab() {
@@ -474,6 +499,7 @@ function showvocab() {
     document.getElementById("info").style.display = "none";
     document.getElementById("about").style.display = "none";
     document.getElementById("previous").style.display = "none";
+    document.getElementById("settings").style.display = "none";
 }
 
 function showabout() {
@@ -481,6 +507,7 @@ document.getElementById("info").style.display = "none";
 document.getElementById("about").style.display = "block";
 document.getElementById("previous").style.display = "none";
 document.getElementById("vocablistside").style.display = "none";
+document.getElementById("settings").style.display = "none";
 }
 
 function showprev() {
@@ -488,6 +515,7 @@ document.getElementById("info").style.display = "none";
 document.getElementById("about").style.display = "none";
 document.getElementById("previous").style.display = "block";
 document.getElementById("vocablistside").style.display = "none";
+document.getElementById("settings").style.display = "none";
 }
 
 function genvocab() {
@@ -510,6 +538,22 @@ function genvocab() {
         let vx = dictverb[a];
         if (va == "n") {
             vocabularylist.push([vx[0], v[5], "verb"]);
+        }
+    }
+    for (let a = 0; a < dictobj.length; a++) {
+        let v = dictobj[a].slice();
+        if (v[0].substring(0,2) == "a ") {
+            v[0] = v[0].substring(2);
+        }
+        if (v[0].substring(0,3) == "an ") {
+            v[0] = v[0].substring(3);
+        }
+        if (v[0].substring(0,4) == "the ") {
+            v[0] = v[0].substring(4);
+        }
+        let va = v[v.length-1];
+        if (Number.isInteger(va) == false) {
+            vocabularylist.push([v[0], v[v.length-1], "nominal"]);
         }
     }
     vocabularylist.sort((a, b) => a[0].localeCompare(b[0]));

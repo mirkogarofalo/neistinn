@@ -465,9 +465,9 @@ cell8.style.color = "#FF0000";
 cell9.style.color = "#FF0000";
 cell10.style.color = "#FF0000";
 } else if (document.getElementById("subjices").style.color == "rgb(0, 255, 0)" && document.getElementById("verbices").style.color == "rgb(0, 255, 0)" && document.getElementById("subjices").style.color == "rgb(0, 255, 0)") {
-cell8.style.color = "#000000";
-cell9.style.color = "#000000";
-cell10.style.color = "#000000";
+cell8.style.color = "#00ff00";
+cell9.style.color = "#00ff00";
+cell10.style.color = "#00ff00";
 totcorr++;
 }
 document.getElementById("totcount").innerHTML = "Correct sentences: " + totcorr + "/" + count;

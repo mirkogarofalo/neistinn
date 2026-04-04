@@ -3,6 +3,12 @@
 
 _Neistinn_ (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb and object. The app generates a sentence in English that has to be translated into Icelandic.
 
+Features:
+- Four possible tenses for training (present, past, present progressive, past progressive)
+- Semi-randomized generation of sentences (subjects are picked randomly; each verb is associated to a specific subset of objects; a specific subset of adjectives is associated to certain subjects and objects)
+- Option to copy and paste the training results into Excel
+- Vocabulary list
+
 Todo for version 1.1:
 - [ ] categorize words based on their CEFR-level (A1, A2, B1)
 - [ ] add the option to exclude words that belong to a higher proficiency level

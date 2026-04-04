@@ -45,6 +45,10 @@ const dictsubj = [
 ["An actress", "leikkona", 2, "adj", ["fræg", "ung"], ["famous", "young"], "x"],
 ["The actress", "leikkonan", 2, "adj", ["fræga", "unga"], ["famous", "young"]],
 ["The actresses", "leikkonurnar", 5, "adj", ["frægu", "ungu"], ["famous", "young"]],
+["My boyfriend", "kærastinn minn", 2],
+["Your boyfriend", "kærastinn þinn", 2],
+["Your girlfriend", "kærastan þín", 2],
+["My girlfriend", "kærastan mín", 2],
 ];
 const dictverb = [
 ["assist", "assists", 0, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40]],
@@ -57,8 +61,8 @@ const dictverb = [
 ["drink", "drinks", 7, [46, 47, 48, 49, 50]],
 ["watch", "watches", 8, [51, 52, 53]],
 ["paint", "paints", 9, [54, 55, 68, 69, 70]],
-["buy", "buys", 10, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76]],
-["sell", "sells", 11, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76]],
+["buy", "buys", 10, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80]],
+["sell", "sells", 11, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80]],
 ["read", "reads", 12, [56, 57, 58, 59, 60, 61, 62, 63]],
 ["write", "writes", 13, [56, 57, 58, 59, 60, 61, 62, 63]],
 ["forget", "forgets", 14, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 71, 72, 73, 74]],
@@ -72,33 +76,33 @@ const dictverb = [
 ["drank", "drank", 22, [46, 47, 48, 49, 50]],
 ["watched", "watched", 23, [51, 52, 53]],
 ["painted", "painted", 24, [54, 55, 68, 69, 70]],
-["bought", "bought", 25, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76]],
-["sold", "sold", 26, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76]],
+["bought", "bought", 25, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80]],
+["sold", "sold", 26, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80]],
 ["read (past)", "read (past)", 27, [56, 57, 58, 59, 60, 61, 62, 63]],
 ["wrote", "wrote", 28, [56, 57, 58, 59, 60, 61, 62, 63]],
 ["forgot", "forgot", 29, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 71, 72, 73, 74]],
 ["are assisting", "is assisting", 30, [1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40]],
-["are helping", "is helping", 31, [11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41]],
-["are following", "is following", 32, [11, 12, 13, 14, 15, 16, 17, 18, 19, 32, 33, 38, 39]],
+["are helping", "is helping", 31, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41]],
+["are following", "is following", 32, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 32, 33, 38, 39]],
 ["are studying", "is studying", 33, [34, 35]],
 ["are eating", "is eating", 34, [42, 43, 44, 45]],
 ["are drinking", "is drinking", 35, [46, 47, 48, 49, 50]],
 ["are watching", "is watching", 36, [51, 52, 53]],
 ["are painting", "is painting", 37, [54, 55, 68, 69, 70]],
-["are buying", "is buying", 38, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76]],
-["are selling", "is selling", 39, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76]],
+["are buying", "is buying", 38, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80]],
+["are selling", "is selling", 39, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80]],
 ["are reading", "is reading", 40, [56, 57, 58, 59, 60, 61, 62, 63]],
 ["are writing", "is writing", 41, [56, 57, 58, 59, 60, 61, 62, 63]],
 ["were assisting", "was assisting", 42, [1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40]],
-["were helping", "was helping", 43, [11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41]],
-["were following", "was following", 44, [11, 12, 13, 14, 15, 16, 17, 18, 19, 32, 33, 38, 39]],
+["were helping", "was helping", 43, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41]],
+["were following", "was following", 44, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 32, 33, 38, 39]],
 ["were studying", "was studying", 45, [34, 35]],
 ["were eating", "was eating", 46, [42, 43, 44, 45]],
 ["were drinking", "was drinking", 47, [46, 47, 48, 49, 50]],
 ["were watching", "was watching", 48, [51, 52, 53]],
 ["were painting", "was painting", 49, [54, 55, 68, 69, 70]],
-["were buying", "was buying", 50, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76]],
-["were selling", "was selling", 51, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76]],
+["were buying", "was buying", 50, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80]],
+["were selling", "was selling", 51, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80]],
 ["were reading", "was reading", 52, [56, 57, 58, 59, 60, 61, 62, 63]],
 ["were writing", "was writing", 53, [56, 57, 58, 59, 60, 61, 62, 63]],
 ];
@@ -146,18 +150,18 @@ const arrayv = [
 ["er að selja", "ert að selja", "er að selja", "erum að selja", "eruð að selja", "eru að selja", "np"],
 ["er að lesa", "ert að lesa", "er að lesa", "erum að lesa", "eruð að lesa", "eru að lesa", "np"],
 ["er að skrifa", "ert að skrifa", "er að skrifa", "erum að skrifa", "eruð að skrifa", "eru að skrifa", "np"],
-["var að aðstoða", "varst að aðstoða", "var að aðstoða", "vorum að aðstoða", "voruð að aðstoða", "voru að aðstoða", "np"],
-["var að hjálpa", "varst að hjálpa", "var að hjálpa", "vorum að hjálpa", "voruð að hjálpa", "voru að hjálpa", "np"],
-["var að fylgja", "varst að fylgja", "var að fylgja", "vorum að fylgja", "voruð að fylgja", "voru að fylgja", "np"],
-["var að læra", "varst að læra", "var að læra", "vorum að læra", "voruð að læra", "voru að læra", "np"],
-["var að borða", "varst að borða", "var að borða", "vorum að borða", "voruð að borða", "voru að borða", "np"],
-["var að drekka", "varst að drekka", "var að drekka", "vorum að drekka", "voruð að drekka", "voru að drekka", "np"],
-["var að horfa á", "varst að horfa á", "var að horfa á", "vorum að horfa á", "voruð að horfa á", "voru að horfa á", "np"],
-["var að mála", "varst að mála", "var að mála", "vorum að mála", "voruð að mála", "voru að mála", "np"],
-["var að kaupa", "varst að kaupa", "var að kaupa", "vorum að kaupa", "voruð að kaupa", "voru að kaupa", "np"],
-["var að selja", "varst að selja", "var að selja", "vorum að selja", "voruð að selja", "voru að selja", "np"],
-["var að lesa", "varst að lesa", "var að lesa", "vorum að lesa", "voruð að lesa", "voru að lesa", "np"],
-["var að skrifa", "varst að skrifa", "var að skrifa", "vorum að skrifa", "voruð að skrifa", "voru að skrifa", "np"],
+["var að aðstoða", "varst að aðstoða", "var að aðstoða", "vorum að aðstoða", "voruð að aðstoða", "voru að aðstoða", "pp"],
+["var að hjálpa", "varst að hjálpa", "var að hjálpa", "vorum að hjálpa", "voruð að hjálpa", "voru að hjálpa", "pp"],
+["var að fylgja", "varst að fylgja", "var að fylgja", "vorum að fylgja", "voruð að fylgja", "voru að fylgja", "pp"],
+["var að læra", "varst að læra", "var að læra", "vorum að læra", "voruð að læra", "voru að læra", "pp"],
+["var að borða", "varst að borða", "var að borða", "vorum að borða", "voruð að borða", "voru að borða", "pp"],
+["var að drekka", "varst að drekka", "var að drekka", "vorum að drekka", "voruð að drekka", "voru að drekka", "pp"],
+["var að horfa á", "varst að horfa á", "var að horfa á", "vorum að horfa á", "voruð að horfa á", "voru að horfa á", "pp"],
+["var að mála", "varst að mála", "var að mála", "vorum að mála", "voruð að mála", "voru að mála", "pp"],
+["var að kaupa", "varst að kaupa", "var að kaupa", "vorum að kaupa", "voruð að kaupa", "voru að kaupa", "pp"],
+["var að selja", "varst að selja", "var að selja", "vorum að selja", "voruð að selja", "voru að selja", "pp"],
+["var að lesa", "varst að lesa", "var að lesa", "vorum að lesa", "voruð að lesa", "voru að lesa", "pp"],
+["var að skrifa", "varst að skrifa", "var að skrifa", "vorum að skrifa", "voruð að skrifa", "voru að skrifa", "pp"],
 ];
 
 const dictobj = [
@@ -238,6 +242,10 @@ const dictobj = [
 ["the wallet", "veskinu", "dat", "adj", ["hvíta", "svarta", "brúna"], ["white", "black", "brown"], 74],
 ["the wallet", "veskið", "acc", "adj", ["hvíta", "svarta", "brúna"], ["white", "black", "brown"], 75],
 ["a wallet", "veski", "acc", "adj", ["hvítt", "svart", "brúnt"], ["white", "black", "brown"], 76],
+["a house", "hús", "acc", "adj", ["nýtt", "lítið", "stórt"], ["new", "small", "big"], 77, "hús"],
+["the house", "húsið", "acc", "adj", ["nýja", "litla", "stóra"], ["new", "small", "big"], 78],
+["an apartment", "íbúð", "acc", "adj", ["nýja", "litla", "stóra"], ["new", "small", "big"], 79, "íbúð"],
+["the apartment", "íbúðina", "acc", "adj", ["nýju", "litla", "stóru"], ["new", "small", "big"], 80],
 ];
 
 let randIndex1;
@@ -261,7 +269,7 @@ let trim4;
 let adjoice;
 let varbut1;
 let varbut2;
-const vocabularylist = [["Icelandic", "íslenskur", "adjective"], ["new", "nýr", "adjective"],["old", "gamall", "adjective"],["blonde", "ljóshærður", "adjective"],["dark-haired", "dökkhærður", "adjective"],["French", "franskur", "adjective"],["young", "ungur", "adjective"],["white", "hvítur", "adjective"],["black", "svartur", "adjective"],["brown", "brúnn", "adjective"],["big", "stór", "adjective"],["tall", "hávaxinn", "adjective"],["popular", "vinsæll", "adjective"],["boring", "leiðinlegur", "adjective"],["beautiful", "fallegur", "adjective"],["romantic", "rómantískur", "adjective"],["thick", "þykkur", "adjective"],["American", "bandarískur", "adjective"],["dad", "pabbi", "nominal"],["mum", "mamma", "nominal"],["sister", "systir", "nominal"],["brother", "bróðir", "nominal"],["long", "langur", "adjective"],["famous", "frægur", "adjective"],["friend", "vinur", "nominal"]];
+const vocabularylist = [["Icelandic", "íslenskur", "adjective"], ["new", "nýr", "adjective"],["old", "gamall", "adjective"],["blonde", "ljóshærður", "adjective"],["dark-haired", "dökkhærður", "adjective"],["French", "franskur", "adjective"],["young", "ungur", "adjective"],["white", "hvítur", "adjective"],["black", "svartur", "adjective"],["brown", "brúnn", "adjective"],["big", "stór", "adjective"],["tall", "hávaxinn", "adjective"],["popular", "vinsæll", "adjective"],["boring", "leiðinlegur", "adjective"],["beautiful", "fallegur", "adjective"],["romantic", "rómantískur", "adjective"],["thick", "þykkur", "adjective"],["American", "bandarískur", "adjective"],["dad", "pabbi", "nominal"],["mum", "mamma", "nominal"],["sister", "systir", "nominal"],["brother", "bróðir", "nominal"],["long", "langur", "adjective"],["famous", "frægur", "adjective"],["friend", "vinur", "nominal"],["boyfriend", "kærasti", "nominal"],["girlfriend", "kærasta", "nominal"],["small", "lítill", "adjective"]];
 
 genvocab();
 
@@ -308,6 +316,14 @@ randindex3 = Math.floor(Math.random() * dictverb[randindex2][3].length);
 a = dictsubj[randindex1][0];
 if (dictsubj[randindex1][2] == 2) {
 b = dictverb[randindex2][1];
+} else if (dictsubj[randindex1][2] == 0) {
+    if (arrayv[randindex2][6] == "np") {
+    b = "am" + dictverb[randindex2][0].substring(3);
+    } else if (arrayv[randindex2][6] == "pp") {
+    b = "was" + dictverb[randindex2][0].substring(4);
+    } else {
+        b = dictverb[randindex2][0];
+    }
 } else {
 b = dictverb[randindex2][0];
 }

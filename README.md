@@ -5,7 +5,10 @@ _Neistinn_ (in English ‘the spark’) trains learners of Icelandic to build si
 
 Features:
 - Four possible tenses for training (present, past, present progressive, past progressive)
-- Semi-randomized generation of sentences (subjects are picked randomly; each verb is associated to a specific subset of objects; a specific subset of adjectives is associated to certain subjects and objects)
+- Semi-randomized generation of sentences:
+  - Subjects are picked randomly;
+  - Each verb is associated to a specific subset of objects, from which one object is picked randomly;
+  - A specific subset of adjectives is associated to certain subjects and objects. The user can choose whether the adjective can be added or not.
 - Option to copy and paste the training results into Excel
 - Vocabulary list
 

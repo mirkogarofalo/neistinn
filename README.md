@@ -8,6 +8,7 @@ Features:
 - Semi-randomized generation of sentences:
   - Subjects are picked randomly;
   - Each verb is associated to a specific subset of objects, from which one object is picked randomly;
+  - If the verb requires an accusative subject, the correct form of the subject is picked accordingly;
   - A specific subset of adjectives is associated to certain subjects and objects. The user can choose whether the adjective can be added or not.
 - Option to copy and paste the training results into Excel
 - Vocabulary list

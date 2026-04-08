@@ -15,7 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-const dictsubj = [
+let dictsubj = [];
+let dictverb = [];
+let arrayv = [];
+
+const dictsubjnom = [
 ["I", "ég", 0, "x"],
 ["You", "þú", 1, "x"],
 ["He", "hann", 2, "x"],
@@ -50,7 +54,44 @@ const dictsubj = [
 ["Your girlfriend", "kærastan þín", 2],
 ["My girlfriend", "kærastan mín", 2],
 ];
-const dictverb = [
+
+const dictsubjacc = [
+["I", "mig", 0],
+["You", "þig", 1],
+["He", "hann", 2],
+["She", "hana", 2],
+["It", "það", 2],
+["We", "okkur", 3],
+["You (pl)", "ykkur", 4],
+["They (m)", "þá", 5],
+["They (f)", "þær", 5],
+["They (n)", "þau", 5],
+["The student", "nemandann", 2, "adj", ["íslenska", "nýja"], ["Icelandic", "new"]],
+["A student", "nemanda", 2, "adj", ["íslenskan", "nýjan"], ["Icelandic", "new"]],
+["The teacher", "kennarann", 2, "adj", ["gamla", "ljóshærða", "dökkhærða", "nýja"], ["old", "blonde", "dark-haired", "new"]],
+["A teacher", "kennara", 2, "adj", ["gamlan", "ljóshærðan", "dökkhærðan"], ["old", "blonde", "dark-haired"]],
+["The tourist", "ferðamanninn", 2, "adj", ["franska", "unga"], ["French", "young"]],
+["Tourists", "ferðamenn", 5],
+["The tourists", "ferðamennina", 5, "adj", ["ungu", "bandarísku"], ["young", "American"]],
+["A tourist", "ferðamann", 2, "adj", ["franskan", "ungan"], ["French", "young"]],
+["Your mum", "mömmu þína", 2],
+["Your dad", "pabba þinn", 2],
+["Your sister", "systur þína", 2],
+["Your brother", "bróður þinn", 2],
+["My friends", "vini mína", 5],
+["Your friends", "vini þína", 5],
+["Your friend", "vin þinn", 2],
+["My friend", "vin minn", 2],
+["An actress", "leikkonu", 2, "adj", ["fræga", "unga"], ["famous", "young"]],
+["The actress", "leikkonuna", 2, "adj", ["frægu", "ungu"], ["famous", "young"]],
+["The actresses", "leikkonurnar", 5, "adj", ["frægu", "ungu"], ["famous", "young"]],
+["My boyfriend", "kærastann minn", 2],
+["Your boyfriend", "kærastann þinn", 2],
+["Your girlfriend", "kærustuna þína", 2],
+["My girlfriend", "kærustuna mína", 2],
+];
+
+const dictverbnom = [
 ["assist", "assists", 0, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40]],
 ["help", "helps", 1, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41]],
 ["miss", "misses", 2, [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]],
@@ -121,7 +162,13 @@ const dictverb = [
 ["were throwing away", "was throwing away", 67, [71, 72, 95, 96]],
 ];
 
-const arrayv = [
+const dictverbacc = [
+["lack", "lacks", 0, [64, 89]],
+["lacked", "lacked", 1, [64, 89]],
+["want", "wants", 2, [45, 46, 47, 48, 49, 50]],
+];
+
+const arrayvnom = [
 ["aðstoða", "aðstoðar", "aðstoðar", "aðstoðum", "aðstoðið", "aðstoða", "n"],
 ["hjálpa", "hjálpar", "hjálpar", "hjálpum", "hjálpið", "hjálpa", "n"],
 ["sakna", "saknar", "saknar", "söknum", "saknið", "sakna", "n"],
@@ -190,6 +237,12 @@ const arrayv = [
 ["henti", "hentir", "henti", "hentum", "hentuð", "hentu", "p"],
 ["er að henda", "ert að henda", "er að henda", "erum að henda", "eruð að henda", "eru að henda", "np"],
 ["var að henda", "varst að henda", "var að henda", "vorum að henda", "voruð að henda", "voru að henda", "pp"],
+];
+
+const arrayvacc = [
+["vantar", "vantar", "vantar", "vantar", "vantar", "vantar", "n"],
+["vantaði", "vantaði", "vantaði", "vantaði", "vantaði", "vantaði", "p"],
+["langar í", "langar í", "langar í", "langar í", "langar í", "langar í", "n"],
 ];
 
 const dictobj = [
@@ -314,6 +367,7 @@ let trim4;
 let adjoice;
 let varbut1;
 let varbut2;
+let randgenind;
 const vocabularylist = [["Icelandic", "íslenskur", "adjective"], ["new", "nýr", "adjective"],["old", "gamall", "adjective"],["blonde", "ljóshærður", "adjective"],["dark-haired", "dökkhærður", "adjective"],["French", "franskur", "adjective"],["young", "ungur", "adjective"],["white", "hvítur", "adjective"],["black", "svartur", "adjective"],["brown", "brúnn", "adjective"],["big", "stór", "adjective"],["tall", "hávaxinn", "adjective"],["popular", "vinsæll", "adjective"],["boring", "leiðinlegur", "adjective"],["beautiful", "fallegur", "adjective"],["romantic", "rómantískur", "adjective"],["thick", "þykkur", "adjective"],["American", "bandarískur", "adjective"],["dad", "pabbi", "nominal"],["mum", "mamma", "nominal"],["sister", "systir", "nominal"],["brother", "bróðir", "nominal"],["long", "langur", "adjective"],["famous", "frægur", "adjective"],["friend", "vinur", "nominal"],["boyfriend", "kærasti", "nominal"],["girlfriend", "kærasta", "nominal"],["small", "lítill", "adjective"],["used", "notaður", "adjective"]];
 
 genvocab();
@@ -328,6 +382,19 @@ document.getElementById("objice").value = "";
 function generate() {
 if (count > 0) {
 chronol();
+}
+arrayv.length = 0;
+dictsubj.length = 0;
+dictverb.length = 0;
+randgenind = Math.floor(Math.random() * 5);
+if (randgenind == 5) {
+    arrayv = [...arrayvacc];
+    dictsubj = [...dictsubjacc];
+    dictverb = [...dictverbacc];
+} else {
+    arrayv = [...arrayvnom];
+    dictsubj = [...dictsubjnom];
+    dictverb = [...dictverbnom];
 }
 adjs = "";
 trim1 = "";
@@ -692,8 +759,8 @@ document.getElementById("settings").style.display = "none";
 }
 
 function genvocab() {
-    for (let a = 0; a < dictsubj.length; a++) {
-        let v = dictsubj[a].slice();
+    for (let a = 0; a < dictsubjnom.length; a++) {
+        let v = dictsubjnom[a].slice();
         if (v[0].substring(0,2) == "A ") {
         v[0] = v[0].substring(2);
         }
@@ -705,10 +772,10 @@ function genvocab() {
             vocabularylist.push([v[0], v[1], "nominal"]);
         }
     }
-    for (let a = 0; a < arrayv.length; a++) {
-        let v = arrayv[a];
+    for (let a = 0; a < arrayvnom.length; a++) {
+        let v = arrayvnom[a];
         let va = v[v.length-1];
-        let vx = dictverb[a];
+        let vx = dictverbnom[a];
         if (va == "n") {
             vocabularylist.push([vx[0], v[5], "verb"]);
         }

@@ -19,6 +19,25 @@ let dictsubj = [];
 let dictverb = [];
 let arrayv = [];
 
+let subja1nom = [];
+let subja1acc = [];
+let subja2nom = [];
+let subja2acc = [];
+let subjb1nom = [];
+let subjb1acc = [];
+let verba1 = [];
+let verba2 = [];
+let verbb1 = [];
+let obja1acc = [];
+let obja1dat = [];
+let obja1gen = [];
+let obja2acc = [];
+let obja2dat = [];
+let obja2gen = [];
+let objb1acc = [];
+let objb1dat = [];
+let objb1gen = [];
+
 const dictsubjnom = [
 ["I", "ég", 0, "x"],
 ["You", "þú", 1, "x"],
@@ -160,12 +179,25 @@ const dictverbnom = [
 ["threw away", "threw away", 65, [71, 72]],
 ["are throwing away", "is throwing away", 66, [71, 72, 95, 96]],
 ["were throwing away", "was throwing away", 67, [71, 72, 95, 96]],
+["are going to assist", "is going to assist", 68, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40]],
+["are going to help", "is going to help", 69, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41]],
+["are going to follow", "is going to follow", 70, [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 32, 33, 38, 39]],
+["are going to study", "is going to study", 71, [34, 35]],
+["are going to eat", "is going to eat", 72, [42, 43, 44, 45]],
+["are going to drink", "is going to drink", 73, [46, 47, 48, 49, 50]],
+["are going to watch", "is going to watch", 74, [51, 52, 53]],
+["are going to paint", "is going to paint", 75, [54, 55, 68, 69, 70]],
+["are going to buy", "is going to buy", 76, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80, 89, 90]],
+["are going to sell", "is going to sell", 77, [30, 31, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 64, 65, 66, 67, 75, 76, 77, 78, 79, 80, 89, 90]],
+["are going to read", "is going to read", 78, [56, 57, 58, 59, 60, 61, 62, 63]],
+["are going to write", "is going to write", 79, [56, 57, 58, 59, 60, 61, 62, 63]],
 ];
 
 const dictverbacc = [
-["lack", "lacks", 0, [64, 89]],
-["lacked", "lacked", 1, [64, 89]],
+["lack (= do not have)", "lacks (= does not have)", 0, [64, 89, 65, 56, 57]],
+["lacked (= did not have)", "lacked (= did not have)", 1, [64, 89, 65, 56, 57]],
 ["want", "wants", 2, [45, 46, 47, 48, 49, 50]],
+["wanted", "wanted", 3, [45, 46, 47, 48, 49, 50]],
 ];
 
 const arrayvnom = [
@@ -237,12 +269,25 @@ const arrayvnom = [
 ["henti", "hentir", "henti", "hentum", "hentuð", "hentu", "p"],
 ["er að henda", "ert að henda", "er að henda", "erum að henda", "eruð að henda", "eru að henda", "np"],
 ["var að henda", "varst að henda", "var að henda", "vorum að henda", "voruð að henda", "voru að henda", "pp"],
+["ætla að aðstoða", "ætlar að aðstoða", "ætlar að aðstoða", "ætlum að aðstoða", "ætlið að aðstoða", "ætla að aðstoða", "f"],
+["ætla að hjálpa", "ætlar að hjálpa", "ætlar að hjálpa", "ætlum að hjálpa", "ætlið að hjálpa", "ætla að hjálpa", "f"],
+["ætla að fylgja", "ætlar að fylgja", "ætlar að fylgja", "ætlum að fylgja", "ætlið að fylgja", "ætla að fylgja", "f"],
+["ætla að læra", "ætlar að læra", "ætlar að læra", "ætlum að læra", "ætlið að læra", "ætla að læra", "f"],
+["ætla að borða", "ætlar að borða", "ætlar að borða", "ætlum að borða", "ætlið að borða", "ætla að borða", "f"],
+["ætla að drekka", "ætlar að drekka", "ætlar að drekka", "ætlum að drekka", "ætlið að drekka", "ætla að drekka", "f"],
+["ætla að horfa á", "ætlar að horfa á", "ætlar að horfa á", "ætlum að horfa á", "ætlið að horfa á", "ætla að horfa á", "f"],
+["ætla að mála", "ætlar að mála", "ætlar að mála", "ætlum að mála", "ætlið að mála", "ætla að mála", "f"],
+["ætla að kaupa", "ætlar að kaupa", "ætlar að kaupa", "ætlum að kaupa", "ætlið að kaupa", "ætla að kaupa", "f"],
+["ætla að selja", "ætlar að selja", "ætlar að selja", "ætlum að selja", "ætlið að selja", "ætla að selja", "f"],
+["ætla að lesa", "ætlar að lesa", "ætlar að lesa", "ætlum að lesa", "ætlið að lesa", "ætla að lesa", "f"],
+["ætla að skrifa", "ætlar að skrifa", "ætlar að skrifa", "ætlum að skrifa", "ætlið að skrifa", "ætla að skrifa", "f"],
 ];
 
 const arrayvacc = [
 ["vantar", "vantar", "vantar", "vantar", "vantar", "vantar", "n"],
 ["vantaði", "vantaði", "vantaði", "vantaði", "vantaði", "vantaði", "p"],
 ["langar í", "langar í", "langar í", "langar í", "langar í", "langar í", "n"],
+["langaði í", "langaði í", "langaði í", "langaði í", "langaði í", "langaði í", "n"],
 ];
 
 const dictobj = [
@@ -368,7 +413,7 @@ let adjoice;
 let varbut1;
 let varbut2;
 let randgenind;
-const vocabularylist = [["Icelandic", "íslenskur", "adjective"], ["new", "nýr", "adjective"],["old", "gamall", "adjective"],["blonde", "ljóshærður", "adjective"],["dark-haired", "dökkhærður", "adjective"],["French", "franskur", "adjective"],["young", "ungur", "adjective"],["white", "hvítur", "adjective"],["black", "svartur", "adjective"],["brown", "brúnn", "adjective"],["big", "stór", "adjective"],["tall", "hávaxinn", "adjective"],["popular", "vinsæll", "adjective"],["boring", "leiðinlegur", "adjective"],["beautiful", "fallegur", "adjective"],["romantic", "rómantískur", "adjective"],["thick", "þykkur", "adjective"],["American", "bandarískur", "adjective"],["dad", "pabbi", "nominal"],["mum", "mamma", "nominal"],["sister", "systir", "nominal"],["brother", "bróðir", "nominal"],["long", "langur", "adjective"],["famous", "frægur", "adjective"],["friend", "vinur", "nominal"],["boyfriend", "kærasti", "nominal"],["girlfriend", "kærasta", "nominal"],["small", "lítill", "adjective"],["used", "notaður", "adjective"]];
+const vocabularylist = [["Icelandic", "íslenskur", "adjective"], ["new", "nýr", "adjective"],["old", "gamall", "adjective"],["blonde", "ljóshærður", "adjective"],["dark-haired", "dökkhærður", "adjective"],["French", "franskur", "adjective"],["young", "ungur", "adjective"],["white", "hvítur", "adjective"],["black", "svartur", "adjective"],["brown", "brúnn", "adjective"],["big", "stór", "adjective"],["tall", "hávaxinn", "adjective"],["popular", "vinsæll", "adjective"],["boring", "leiðinlegur", "adjective"],["beautiful", "fallegur", "adjective"],["romantic", "rómantískur", "adjective"],["thick", "þykkur", "adjective"],["American", "bandarískur", "adjective"],["dad", "pabbi", "nominal"],["mum", "mamma", "nominal"],["sister", "systir", "nominal"],["brother", "bróðir", "nominal"],["long", "langur", "adjective"],["famous", "frægur", "adjective"],["friend", "vinur", "nominal"],["boyfriend", "kærasti", "nominal"],["girlfriend", "kærasta", "nominal"],["small", "lítill", "adjective"],["used", "notaður", "adjective"],["lack", "vanta", "verb"],["want", "langa í", "verb"]];
 
 genvocab();
 
@@ -386,8 +431,8 @@ chronol();
 arrayv.length = 0;
 dictsubj.length = 0;
 dictverb.length = 0;
-randgenind = Math.floor(Math.random() * 5);
-if (randgenind == 5) {
+randgenind = Math.floor(Math.random() * 10);
+if (randgenind == 9) {
     arrayv = [...arrayvacc];
     dictsubj = [...dictsubjacc];
     dictverb = [...dictverbacc];
@@ -431,6 +476,8 @@ b = dictverb[randindex2][1];
 } else if (dictsubj[randindex1][2] == 0) {
     if (arrayv[randindex2][6] == "np") {
     b = "am" + dictverb[randindex2][0].substring(3);
+    } else if (arrayv[randindex2][6] == "f") {
+        b = "am" + dictverb[randindex2][0].substring(3);
     } else if (arrayv[randindex2][6] == "pp") {
     b = "was" + dictverb[randindex2][0].substring(4);
     } else {

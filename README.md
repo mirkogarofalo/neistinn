@@ -13,7 +13,7 @@ Features:
 - Option to copy and paste the training results into Excel
 - Vocabulary list
 
-Todo for version 1.1:
+Todo for version 1.2:
 - [ ] categorize words based on their CEFR-level (A1, A2, B1)
 - [ ] add the option to exclude words that belong to a higher proficiency level
 - [ ] add further nouns, adjectives and verbs

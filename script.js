@@ -653,6 +653,9 @@ document.getElementById("verif").disabled = true;
 var x = document.getElementById("subjice").value.toLowerCase();
 var y = document.getElementById("verbice").value.toLowerCase();
 var z = document.getElementById("objice").value.toLowerCase();
+x = x.trimEnd();
+y = y.trimEnd();
+z = z.trimEnd();
 
 if (adjsice == "" & varbut1 == 0) {
 if (x == dictsubj[randindex1][1].toLowerCase()) {

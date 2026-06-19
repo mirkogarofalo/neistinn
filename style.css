@@ -60,12 +60,13 @@ button {
 }
 
 #adjs, #adjo {
-    background-color: #4a90e2;
-    color: #fff;
+    background-color: #dddddd;
+    color: #000;
     border: none;
     padding: 5px;
     border-radius: 8px;
     font-size: 14px;
+    font-variant: small-caps;
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 0px;
@@ -80,7 +81,7 @@ button {
 }
 
 #adjs:hover, #adjo:hover, button:hover {
-    background-color: #357ab8;
+    background-color: #eeeeee;
 }
 
 button:disabled {
@@ -94,7 +95,7 @@ button:disabled {
 .container {
     display: flex;
     flex-direction: column;
-    width: 63%; /* Adjust width as needed */
+    width: 55%; /* Adjust width as needed */
     margin-top: 20px;/* Space between */
     background-color: #fff;
     margin: 20px;
@@ -111,7 +112,7 @@ button:disabled {
 }
 
 .side {
-    width: 37%;
+    width: 45%;
     margin-top: 20px;
     background-color: #fff;
     margin: 20px;
@@ -165,41 +166,42 @@ overflow: scroll; /* Space between */
 padding: 10px;
 border: 1px solid #ddd;
 text-align: left;
-font-size: 24px;
+font-size: 20px;
 }
 
 #maintab p {
-    font-size: 22px;
+    font-size: 18px;
 }
 
 input[type="text"] {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 20px;
     text-align: left;
-    width: 94%;
+    width: 93%;
 }
 
 /* Paragraph Styles */
 p {
     margin: 0;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .links:hover {
     margin: 0;
-    font-size: 24px;
+    font-size: 18px;
     color: #4a90e2;
 }
 
 /* Result Styles */
-#subjices, #verbices, #objices {
+#subjices, #verbices, #objices, #timices {
     font-weight: bold;
+    font-size: 16px;
 }
 
-#subjeng, #verbeng, #objeng {
-    font-style: italic;
+#subjeng, #verbeng, #objeng, #timeng {
+    font-style: normal;
 }
 
 #mainline {
@@ -226,8 +228,97 @@ p {
 #mig {
     width: 200px;
     border-radius: 100px;
-    margin-right: 25px;
+    margin-right: 24px;
     float: left;
+}
+
+#result {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#numbset {
+    background-color: #857fa0;
+    color: #ffffff;
+    padding: 5px 9px;
+    border-radius: 4px;
+    display: inline-block;
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 45px;
+    letter-spacing: 0px;
+}
+
+.phrase-n {
+    background-color: #f56fa0;
+    color: #000000;
+    padding: 4px 7px;
+    border-radius: 4px;
+    display: inline-block;
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 16px;
+    letter-spacing: 0px;
+}
+
+.phrase-c {
+    background-color: #feef60;
+    color: #000000;
+    padding: 4px 7px;
+    border-radius: 4px;
+    display: inline-block;
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 12px;
+    letter-spacing: 0px;
+}
+
+.phrase-p {
+    background-color: #a5b425;
+    color: #000000;
+    padding: 4px 7px;
+    border-radius: 4px;
+    display: inline-block;
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 16px;
+    letter-spacing: 0px;
+}
+
+.phrase-v {
+    background-color: #45bab5;
+    color: #000000;
+    padding: 4px 7px;
+    border-radius: 4px;
+    display: inline-block;
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 16px;
+    letter-spacing: 0px;
+}
+
+.phrase-a {
+    background-color: #dddddd;
+    color: #000000;
+    padding: 4px 7px;
+    border-radius: 4px;
+    display: inline-block;
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 16px;
+    letter-spacing: 0px;
+}
+
+.phrase-pp {
+    background-color: #222222;
+    color: #ffffff;
+    padding: 4px 7px;
+    border-radius: 4px;
+    display: inline-block;
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 16px;
+    letter-spacing: 0px;
 }
 
 /* Responsive Design */

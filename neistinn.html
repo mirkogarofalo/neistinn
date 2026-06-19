@@ -6,19 +6,39 @@
 <body>
 <div class="containerx">
 <div class="container">
-<table id="mainline"><tbody><tr><td><img id="iconmain" src="neistinn.png"></img></td><td><h1>Neistinn</h1></td><td><h2 align="center">Sentence building trainer for learners of Icelandic - A1-B1 level</h2></td></tr></tbody></table>
+<table id="mainline"><tbody><tr><td><img id="iconmain" src="neistinn.png"></img></td><td><h1>Neistinn</h1></td><td><h2 align="right">Sentence building trainer for learners of Icelandic<br>A1-B1 level</h2></td></tr></tbody></table>
 <hr></hr>
-<div id="mainarea"><table id="maintab"><tbody><tr><td><b>Subject</b></td><td><b>Verb</b></td><td><b>Object</b></td></tr><tr><td><p id="subjeng">-</p></td><td><p id="verbeng">-</p></td><td><p id="objeng">-</p></td></tr><tr><td><input type=text id="subjice" disabled></td><td><input type=text id="verbice" disabled></td><td><input type=text id="objice" disabled></td></tr><tr><td><p id="subjices">-</p></td><td><p id="verbices">-</p></td><td><p id="objices">-</p></td></tr></tbody></table></div>
-<p align=center><button id="gener" onclick="generate()">Generate a sentence</button> <button id="verif" onclick="verif()" disabled>Verify</button></p></div>
+<div id="mainarea"><table id="maintab"><tbody><tr><td><b>Subject</b></td><td><b>Verb</b></td><td><b>Object</b></td><td><b>Time/place</b></td></tr><tr><td><p id="subjeng">-</p></td><td><p id="verbeng">-</p></td><td><p id="objeng">-</p></td><td><p id="timeng">-</p></td></tr><tr><td><input type=text id="subjice" disabled></td><td><input type=text id="verbice" disabled></td><td><input type=text id="objice" disabled></td><td><input type=text id="timice" disabled></td></tr><tr><td><p id="subjices">-</p></td><td><p id="verbices">-</p></td><td><p id="objices">-</p></td><td><p id="timices">-</p></td></tr></tbody></table></div>
+<div id=butt12><p align=center><button id="gener" onclick="generate()">Generate a sentence</button> <button id="verif" onclick="verif()" disabled>Verify</button></p></div><div id="messagearea" style="display:none"><p align=center><img src="celeb.gif" width="250px"></p><p align=center id="result">You wrote correctly </p><button id="clmess" onclick="clmess()">Close</button></div></div>
 <div class="side" id="textchron">
 <div id="about" style="display:none"><h2>About</h2><p class="parag"><img id="mig" src="mig.jpg">Mirko Garofalo is an adjunct lecturer at the University of Iceland and a Doctor in Icelandic linguistics. His main field of interest is syntax, language technology and L2 acquisition, in particular in relation to Icelandic. Mirko has been teaching Icelandic as a second language at beginner, intermediate and advanced level for over a decade at the University of Iceland.</p><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
-<div id="info" style="display:none"><h2>Instructions</h2><p class="parag"><i>Neistinn</i> (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb and object. The app generates a sentence in English that has to be translated into Icelandic. The list of the vocabulary used in this application can be consulted by clicking on <i>Vocabulary</i>.<br><br>To start, click on the button <i>Generate a sentence</i>. A randomized subject, main verb and object will appear. The user can also ask the generator to add an adjective to the subject or the object when the button <i>+adj</i> appears. At that point, the user can type in the text boxes the correct Icelandic translation of the subject, the verb and the object and click on <i>Verify</i> to check whether the answer given is correct.<br><br>The items correctly translated will be marked in green and the incorrect ones in red. If no answer is given, the items will be marked in blue. The examples previously generated will be displayed on the side panel. The previous examples where the translation into Icelandic was incorrect are marked in red.</p><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
+<div id="info" style="display:none"><h2>Instructions</h2><p class="parag"><i>Neistinn</i> (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb, object and information about time or place. The app generates a sequence of words in their default form (e.g. nominative singular for nouns, infinitive for verbs, etc.) which need to be inflected.<br><br>To start, click on the button <i>Generate a sentence</i>. A randomized subject, main verb and object will appear. The user can also ask the generator to add an adjective to the subject or the object when the button <span class="phrase-a">+adj</span> appears. At that point, the user can type in the text boxes the correct Icelandic form of the subject, the verb and the object and click on <i>Verify</i> to check whether the answer given is correct.<br><br>The items correctly translated will be marked in green and the incorrect ones in red. If no answer is given, the items will be marked in blue. The examples previously generated will be displayed on the side panel. The previous examples where the answer was incorrect are marked in red.<br><br>The various components of the sentences are marked with different colors and indications are given e.g. on which tense needs to be used, or whether there is an article attached to the noun, or whether the noun must be in the plural etc. A comprehensive list is shown here:<br><br>
+<b>Colors</b><br><br>
+<span class="phrase-n">hundur</span> This box type is used for nouns and pronouns<br>
+<span class="phrase-a">gamall</span> This box type is used for adjectives<br>
+<span class="phrase-v">fara</span> This box type is used for verbs<br>
+<span class="phrase-pp">til</span> This box type is used for prepositions and particles<br>
+<span class="phrase-p">minn</span> This box type is used for possessive pronouns<br>
+<span class="phrase-c">←nf.</span> This box type is used to signal the correct case after the answer has been given<br><br>
+<b>Abbreviations</b><br><br>
+(FT.) = plural (fleirtala)<br>
++GR. = with article (greinir)<br>
+(NT.) = present tense (nútíð)<br>
+(ÞT.) = past tense (þátíð)<br>
+(S.NT.) = present progressive (samsett nútíð), e.g. <i>Ég er að...</i><br>
+(S.ÞT.) = past progressive (samsett þátíð), e.g. <i>Ég var að...</i><br>
+(S.FRT.) = future (samsett framtíð), e.g. <i>Ég ætla að...</i><br>
+NF. = nominative (nefnifall)<br>
+ÞF. = accusative (þolfall)<br>
+ÞGF. = dative (þágufall)<br>
+EF. = genitive (eignarfall)<br><br>
+<p class="links" onclick="showprev()"><u>Close</u></p></div>
 <div id="vocablistside" style="display:none"><h2>Vocabulary list</h2><table id="sbroc"></table><br><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
 <div id="settings" style="display:none"><h2>Settings</h2><p class="parag">Please note that this section of the application has not been implemented yet. By default, level A1 and A2 vocabulary will be active, but the user can choose to lower the vocabulary level, choose a specific single level to train, or activate them all.<br><br>Level:<br><br><input type="checkbox" id="a1" name="a1" value="a1">A1<br><input type="checkbox" id="a2" name="a2" value="a2">A2<br><input type="checkbox" id="b1" name="b1" value="b1">B1<br></p><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
 <div id="previous"> <h2 id="tit">Previous sentences</h2>
 <table id="chron"><tbody></tbody></table></div></div></div>
 <div class="containerx">
-<div class="container"><table><tbody><tr><td><p>© Mirko Garofalo 2026 (mig@hi.is) - Ver. 1.0</p></td><td><p class="links" onclick="showvocab()" align=center>Vocabulary</p></td><td><p class="links" onclick="showsett()" align=center>Settings</p></td><td><p class="links" onclick="showabout()" align=right>About</p></td><td><p class="links" onclick="showinfo()" align=right>Instructions</p></td></tr></tbody></table></div>
+<div class="container"><table><tbody><tr><td><p>© Mirko Garofalo 2026 (mig@hi.is) - Ver. 1.1</p></td><td><p class="links" onclick="showvocab()" align=center>Vocabulary</p></td><td><p class="links" onclick="showsett()" align=center>Settings</p></td><td><p class="links" onclick="showabout()" align=right>About</p></td><td><p class="links" onclick="showinfo()" align=right>Instructions</p></td></tr></tbody></table></div>
 <div class="side"><table><tr><td><p id="totcount">Correct sentences: </p></td></tr></table></div></div>
 <script type="text/javascript" src="script.js"></script>
 </body>

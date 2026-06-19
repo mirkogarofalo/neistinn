@@ -1,7 +1,7 @@
 
 # <img align="right" src="neistinn.png">  Neistinn - Sentence building trainer for learners of Icelandic - A1-B1 level
 
-_Neistinn_ (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb and object. The app generates a sentence in English that has to be translated into Icelandic.
+_Neistinn_ (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb and object. The app generates a sentence where only the Icelandic lemmas are given. The user has to inflect each component of the sentence correctly.
 
 Features:
 - Five possible tenses for training (present, past, present progressive, past progressive, intentional future)

@@ -13,7 +13,7 @@ h1 {
     text-align: left;
     margin-bottom: 30px;
     margin-top: 20px;
-    font-size: 60px;
+    font-size: 80px;
     padding: 0px 0px 0px 0px;
 }
 
@@ -59,28 +59,29 @@ button {
     margin: 20px auto; /* Center the button */
 }
 
-#adjs, #adjo {
+#adjs, #adjo, #actb {
     background-color: #dddddd;
     color: #000;
     border: none;
-    padding: 5px;
-    border-radius: 8px;
-    font-size: 14px;
+    padding: 4px 7px;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
     font-variant: small-caps;
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 0px;
-    float: right;
 }
 
-#adjs:disabled, #adjo:disabled {
+#adjs:disabled, #adjo:disabled, #actb:disabled {
     background-color: #cccccc; /* Grey background */
     color: #666666; /* Darker grey text */
     cursor: not-allowed; /* Change cursor to indicate it's not clickable */
     opacity: 0.6; /* Slightly transparent effect */
 }
 
-#adjs:hover, #adjo:hover, button:hover {
+#adjs:hover, #adjo:hover, #actb:hover, button:hover {
     background-color: #eeeeee;
 }
 
@@ -250,7 +251,7 @@ p {
 }
 
 .phrase-n {
-    background-color: #f56fa0;
+    background-color: #45ccff;
     color: #000000;
     padding: 4px 7px;
     border-radius: 4px;
@@ -274,7 +275,7 @@ p {
 }
 
 .phrase-p {
-    background-color: #a5b425;
+    background-color: #f5b425;
     color: #000000;
     padding: 4px 7px;
     border-radius: 4px;

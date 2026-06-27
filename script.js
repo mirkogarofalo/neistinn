@@ -1,5 +1,5 @@
 // Neistinn - Sentence building trainer for learners of Icelandic - A1/B1 level
-// Ver 1.0.5 (Jun 2026)
+// Ver 1.0.6 (Jun 2026)
 // Author: Mirko Garofalo (mig@hi.is)
 
 // Preparation of the page
@@ -162,6 +162,61 @@ const dictsubjacc = [
 ["læknir+gr. - þinn", "lækninn þinn", 2],
 ];
 
+const dictsubjdat = [
+["ég", "mér", 2],
+["þú", "þér", 2],
+["hann", "honum", 2],
+["hún", "henni", 2],
+["það", "því", 2],
+["við", "okkur", 2],
+["þið", "ykkur", 2],
+["þeir", "þeim", 2],
+["þær", "þeim", 2],
+["þau", "þeim", 2],
+["nemandi+gr.", "nemandanum", 2, "adj", ["íslenska", "nýja"], ["íslenskur", "nýr"]],
+["nemandi", "nemanda", 2, "adj", ["íslenskum", "nýjum"], ["íslenskur", "nýr"]],
+["kennari+gr.", "kennaranum", 2, "adj", ["gamla", "ljóshærða", "dökkhærða", "nýja"], ["gamall", "ljóshærður", "dökkhærður", "nýr"]],
+["kennari", "kennara", 2, "adj", ["gömlum", "ljóshærðum", "dökkhærðum"], ["gamall", "ljóshærður", "dökkhærður"]],
+["ferðamaður+gr.", "ferðamanninum", 2, "adj", ["franska", "unga"], ["franskur", "ungur"]],
+["ferðamaður (ft.)", "ferðamönnum", 2],
+["ferðamaður+gr. (ft.)", "ferðamönnunum", 2, "adj", ["ungu", "bandarísku"], ["ungur", "bandarískur"]],
+["ferðamaður", "ferðamanni", 2, "adj", ["frönskum", "ungum"], ["franskur", "ungur"]],
+["mamma - þinn", "mömmu þinni", 2],
+["pabbi - þinn", "pabba þínum", 2],
+["systir - þinn", "systur þinni", 2],
+["bróðir - þinn", "bróður þínum", 2],
+["vinur (ft.) - minn", "vinum mínum", 2],
+["vinur (ft.) - þinn", "vinum þínum", 2],
+["vinur - þinn", "vin þínum", 2],
+["vinur - minn", "vin mínum", 2],
+["leikkona", "leikkonu", 2, "adj", ["frægri", "ungri"], ["frægur", "ungur"]],
+["leikkona+gr.", "leikkonunni", 2, "adj", ["frægu", "ungu"], ["frægur", "ungur"]],
+["leikkona+gr. (ft.)", "leikkonunum", 2, "adj", ["frægu", "ungu"], ["frægur", "ungur"]],
+["kærasti+gr. - minn", "kærastanum mínum", 2],
+["kærasti+gr. - þinn", "kærastanum þínum", 2],
+["kærasta+gr. - þinn", "kærustunni þinni", 2],
+["kærasta+gr. - minn", "kærustunni minni", 2],
+["stjóri+gr.", "stjóranum", 2, "adj", ["unga", "gamla"], ["ungur", "gamall"]],
+["stjóri", "stjóra", 2, "adj", ["ungum", "gömlum"], ["ungur", "gamall"]],
+["nágranni", "nágranna", 2, "adj", ["ungum", "gömlum"], ["ungur", "gamall"]],
+["nágranni+gr.", "nágrannanum", 2, "adj", ["unga", "gamla"], ["ungur", "gamall"]],
+["nágranni+gr. (ft.)", "nágrönnunum", 2, "adj", ["ungu", "gömlu"], ["ungur", "gamall"]],
+["dóttir - minn", "dóttur minni", 2],
+["sonur - minn", "syni mínum", 2],
+["barn+gr. (ft.) - minn", "börnunum mínum", 2],
+["dóttir (ft.) - minn", "dætrunum mínum", 2],
+["sonur (ft.) - minn", "sonum mínum", 2],
+["dóttir - þinn", "dóttur þinni", 2],
+["sonur - þinn", "syni þínum", 2],
+["barn+gr. (ft.) - þinn", "börnunum þínum", 2],
+["dóttir (ft.) - þinn", "dætrunum þínum", 2],
+["sonur (ft.) - þinn", "sonum þínum", 2],
+["fjölskylda+gr. - minn", "fjölskyldunni minni", 2],
+["fjölskylda+gr. - þinn", "fjölskyldunni þinni", 2],
+["læknir+gr. - minn", "lækninum mínum", 2],
+["læknir+gr. - þinn", "lækninum þínum", 2],
+];
+
 const vbendingspres = [
 ["a", "ar", "ar", "um", "ið"],
 ["i", "ir", "ir", "um", "ið"],
@@ -173,6 +228,7 @@ const vbendingspres = [
 ["", "tt", "", "um", "ið"],
 ["", "t", "l", "um", "ið"],
 ["ist", "ist", "ist", "jumst", "ist"],
+["ist", "ist", "ist", "umst", "ist"],
 ];
 
 const vbendingspast = [
@@ -187,12 +243,13 @@ const vbendingspast = [
 ["dist", "dist", "dist", "dumst", "dust", "dust"],
 ["tist", "tist", "tist", "tumst", "tust", "tust"],
 ["t", "st", "t", "um", "uð", "u"],
+["st", "st", "st", "umst", "ust", "ust"],
 ];
 
 const dictverbnom = [
 ["aðstoða", "aðstoð", 0, 0, "aðstoð", "aðstoð", "aðstoðað", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["hjálpa", "hjálp", 0, 0, "hjálp", "hjálp", "hjálpað", [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
-["sakna", "sakn", 0, 0, "sakn", "sökn", "saknað", [20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
+["sakna", "sakn", 0, 0, "sakn", "sökn", "saknað", [20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", ["nt.", "þt."], [""]],
 ["sjá", "sé", 4, 5, "sá", "sá", "séð", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 30, 31, 36, 37, 64, 65, 66, 67, 89, 90, 122], "", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
 ["læra", "lær", 1, 1, "lær", "lær", "lært", [34, 35, 123], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["borða", "borð", 0, 0, "borð", "borð", "borðað", [42, 43, 44, 45, 132, 133, 134, 135, 136, 137], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
@@ -204,7 +261,7 @@ const dictverbnom = [
 ["lesa", "les", 5, 5, "las", "lás", "lesið", [56, 57, 58, 59, 60, 61, 62, 63], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["skrifa", "skrif", 0, 0, "skrif", "skrif", "skrifað", [56, 57, 58, 59, 60, 61, 62, 63, 123], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["gleyma", "gleym", 1, 2, "gleym", "gleym", "gleymt", [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 71, 72, 73, 74, 81, 82, 85, 86, 91, 92, 113, 124], "", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
-["týna", "týn", 1, 2, "týn", "týn", "týnt", [73, 74, 81, 82, 91, 92, 113], "", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
+["týna", "týn", 1, 2, "týn", "týn", "týnt", [73, 74, 81, 82, 91, 92, 113], "", ["nt.", "þt."], [""]],
 ["búa", "bý", 4, 4, "bjó", "bjugg", "búið", [42, 43, 50, 83, 84], "til", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["kasta", "kast", 0, 0, "kast", "köst", "kastað", [87, 88, 93, 94], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["henda", "hend", 1, 3, "hen", "hen", "hent", [71, 72], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
@@ -213,7 +270,7 @@ const dictverbnom = [
 ["skila", "skil", 0, 0, "skil", "skil", "skilað", [100, 101, 102, 103, 113], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["spila", "spil", 0, 0, "spil", "spil", "spilað", [97, 98, 99], "á", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["hlusta", "hlust", 0, 0, "hlust", "hlust", "hlustað", [104], "á", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
-["gleðjast", "gleð", 6, 8, "glad", "glöd", "glaðst", [105, 106, 107], "yfir", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
+["gleðjast", "gleð", 6, 8, "glad", "glöd", "glaðst", [105, 106, 107], "yfir", ["nt.", "þt."], [""]],
 ["taka", "tek", 2, 4, "tók", "tók", "tekið", [108, 109, 110], "upp", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["taka", "tek", 2, 4, "tók", "tók", "tekið", [111, 112, 56, 57 ,75], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["opna", "opn", 0, 0, "opn", "opn", "opnað", [56, 57, 75, 114, 116, 117], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
@@ -223,11 +280,20 @@ const dictverbnom = [
 ["hafa", "hef", 2, 1, "haf", "höf", "haft", [120, 121], "", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
 ["fylgjast", "fylg", 9, 8, "fylg", "fylg", "fylgst", [12, 13, 14, 17, 18, 19, 32, 38], "með", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
 ["spyrja", "spyr", 3, 1, "spur", "spur", "spurt", [2, 3, 7, 8, 9, 36, 40], "", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
+["elska", "elsk", 0, 0, "elsk", "elsk", "elskað", [138, 53, 50, 34, 48, 2, 3, 4, 7, 8, 9, 45, 133], "", ["nt.", "þt."], [""]],
+["hata", "hat", 0, 0, "hat", "höt", "hatað", [138, 53, 50, 34, 48, 2, 3, 4, 7, 8, 9, 45, 133], "", ["nt.", "þt."], [""]],
+["fá", "fæ", 4, 4, "fékk", "feng", "fengið", [31, 43, 45, 46, 47, 48, 55, 56, 76, 89, 99, 126, 128, 130, 131, 137], "", ["nt.", "þt."], [""]],
 ];
 
 const dictverbacc = [
 ["langa", "lang", 0, 0, "lang", "lang", "langað", [89, 123, 43, 45, 46, 132, 133, 134, 135, 136, 137], "í", ["nt.", "þt."]],
 ["vanta", "vant", 0, 0, "vant", "vant", "vantað", [64, 89, 65, 56, 57], "", ["nt.", "þt."]],
+];
+
+const dictverbdat = [
+    ["leiðast", "leið", 10, 8, "leid", "leid", "leiðst", [139, 140], "", ["nt.", "þt."]],
+    ["finnast", "finn", 6, 11, "fann", "fund", "fundist", [141, 142, 143, 144, 145, 146, 147], "", ["nt.", "þt."]],
+    ["þykja", "þyk", 1, 3, "þót", "þót", "þótt", [141, 142, 143, 144, 145, 146, 147], "", ["nt.", "þt."]],
 ];
 
 const dictobj = [
@@ -265,7 +331,7 @@ const dictobj = [
 ["hundur", "hund", "þf.", "adj", ["hvítan", "svartan", "stóran", "brúnan"], ["hvítur", "svartur", "stór", "brúnn"], 31],
 ["hundur+gr.", "hundinum", "þgf.", "adj", ["hvíta", "svarta", "stóra", "brúna"], ["hvítur", "svartur", "stór", "brúnn"], 32],
 ["hundur", "hundi", "þgf.", "adj", ["hvítum", "svörtum", "stórum", "brúnum"], ["hvítur", "svartur", "stór", "brúnn"], 33],
-["málfræði", "málfræði", "þf.", 34],
+["málfræði", "málfræði", "þf.", "adj", ["enska", "íslenska", "franska"], ["enskur", "íslenskur", "franskur"], 34],
 ["enska", "ensku", "þf.", 35],
 ["stelpa+gr.", "stelpuna", "þf.", "adj", ["ljóshærðu", "hávöxnu"], ["ljóshærður", "hávaxinn"], 36],
 ["stelpa", "stelpu", "þf.", "adj", ["ljóshærða", "hávaxna"], ["ljóshærður", "hávaxinn"], 37],
@@ -369,6 +435,16 @@ const dictobj = [
 ["súpa", "súpu", "þf.", "adj", ["heita", "kalda"], ["heitur", "kaldur"], 135],
 ["fiskibolla (ft.)", "fiskibollur", "þf.", 136],
 ["kaka", "köku", "þf.", 137],
+["veður+gr.", "veðrið", "þf.", 138],
+["fundur+gr.", "fundurinn", "nf.", 139],
+["sýning+gr.", "sýningin", "nf.", 140],
+["fiskur%góður", "fiskur góður", "nf.", 141],
+["súpa%vondur", "súpa vond", "nf.", 142],
+["ávöxtur (ft.)%bestur", "ávextir bestir", "nf.", 143],
+["íslenska%skemmtilegur", "íslenska skemmtileg", "nf.", 144],
+["kjöt%hræðilegur", "kjöt hræðilegt", "nf.", 145],
+["nemandi+gr. (ft.)%undirbúinn", "nemendurnir undirbúnir", "nf.", 146],
+["bíómynd+gr.%langur", "bíómyndin löng", "nf.", 147],
 ];
 
 const prestime = [
@@ -450,7 +526,7 @@ const futtime = [
 ];
 
 let vocabularylist = [];
-let vocabtrans = ["assist", "backpack", "American", "child", "movie", "beer", "book", "ball", "eat", "letter", "brother", "brown", "live", "day", "dark-haired", "daughter", "drink", "I", "have to", "someone", "something", "cook", "English language", "beautiful", "go", "tourist", "Thursday", "fishcake", "fish", "family", "flute", "people", "Friday", "famous", "French", "watch over", "early tomorrow", "old", "can", "guitar", "rejoice", "forget", "green", "grilled", "have", "half an hour", "hamburger", "manuscript", "he", "tall", "hot", "week-end", "throw away", "help", "listen", "watch", "idea", "she", "dog", "door", "house", "white", "apartment", "Icelandic", "Italian", "girlfriend", "boyfriend", "coffee", "coffee shop", "cake", "cold", "potato", "throw", "buy", "teacher", "chicken", "classical", "evening", "doctor", "learn", "song", "want", "long", "Saturday", "boring", "actress", "read", "small", "blonde", "close", "key", "paint", "grammar", "mum", "Monday", "may", "Wednesday", "morning", "picture", "neighbor", "student", "used", "new","open", "dad", "sweater", "piano", "digital", "wrong", "red", "right", "romantic", "trash", "juice", "miss", "sandwich", "sell", "phone", "see", "return", "write", "office", "drawer", "shirt", "boiled", "son", "play", "ask", "fried", "steal", "girl", "manager", "chair", "big", "t-shirt (short-sleeved)", "short", "Sunday", "soup", "black", "sister", "take", "time", "concert", "music", "lose", "parka", "application", "young", "broadcast", "graduation", "lack", "water", "wall", "restaurant", "must", "wallet", "we", "interview", "week", "want", "wine", "work", "popular", "friend", "it", "they (feminine)", "they (neuter)", "they (masculine)", "you (plural)", "Tuesday", "you (singular)", "need", "thick"];
+let vocabtrans = ["assist", "fruit", "backpack", "American", "child", "best", "movie", "beer", "book", "ball", "eat", "letter", "brother", "brown", "live", "day", "dark-haired", "daughter", "drink", "I", "have to", "someone", "something", "cook", "love", "English language", "English", "get", "beautiful", "go", "tourist", "Thursday", "fishcake", "fish", "family", "flute", "people", "Friday", "famous", "French", "meeting", "watch over", "early tomorrow", "old", "can", "guitar", "rejoice", "forget", "good", "green", "grilled", "have", "half an hour", "hamburger", "manuscript", "he", "hate", "tall", "hot", "week-end", "throw away", "help", "listen", "watch", "horrible", "idea", "she", "dog", "door", "house", "white", "apartment", "Icelandic language", "Icelandic", "Italian", "girlfriend", "boyfriend", "coffee", "coffee shop", "cake", "cold", "potato", "throw", "buy", "teacher", "meat", "chicken", "classical", "evening", "doctor", "learn", "song", "want", "long", "Saturday", "boring", "actress", "read", "small", "blonde", "close", "key", "paint", "grammar", "mum", "Monday", "may", "Wednesday", "morning", "picture", "neighbor", "student", "used", "new","open", "dad", "sweater", "piano", "digital", "wrong", "red", "right", "romantic", "trash", "juice", "miss", "sandwich", "sell", "phone", "see", "fun", "return", "write", "office", "drawer", "shirt", "boiled", "son", "play", "ask", "fried", "steal", "girl", "manager", "chair", "big", "t-shirt (short-sleeved)", "short", "Sunday", "soup", "black", "show", "sister", "take", "time", "concert", "music", "lose", "parka", "application", "prepared", "young", "broadcast", "graduation", "lack", "water", "weather", "wall", "restaurant", "must", "wallet", "we", "interview", "week", "want", "wine", "work", "popular", "friend", "bad", "it", "they (feminine)", "they (neuter)", "they (masculine)", "you (plural)", "Tuesday", "you (singular)", "need", "thick"];
 let vocabularyf = [];
 
 let randindex1;
@@ -507,12 +583,16 @@ chronol();
 dictsubj.length = 0;
 dictverb.length = 0;
 dicttimepl.length = 0;
-randgenind = Math.floor(Math.random() * 10);
+randgenind = Math.floor(Math.random() * 11);
 if (randgenind == 9) {
     dictsubj = [...dictsubjacc];
     dictverb = [...dictverbacc];
     casesubj = "þf.";
 
+} else if (randgenind == 10) {
+    dictsubj = [...dictsubjdat];
+    dictverb = [...dictverbdat];
+    casesubj = "þgf.";
 } else {
     dictsubj = [...dictsubjnom];
     dictverb = [...dictverbnom];
@@ -614,16 +694,18 @@ if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "s.nt.") {
 }
 
 
-if (dictobj[cx][3] == "adj" & c.includes("-") == true) {
+if (dictobj[cx][3] == "adj" & c.includes("-") == true & c.includes("%") == false) {
 document.getElementById("objeng").innerHTML = '<button id="adjo" onclick="addadjo()">+adj</button> <span class="phrase-n">' + c.substring(0,c.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + c.substring(c.lastIndexOf("-")+1,c.length) + '</span>';
 varbut2 = 1;
-} else if (dictobj[cx][3] == "adj" & c.includes("-") == false) {
+} else if (dictobj[cx][3] == "adj" & c.includes("-") == false & c.includes("%") == false) {
     document.getElementById("objeng").innerHTML = '<button id="adjo" onclick="addadjo()">+adj</button> <span class="phrase-n">' + c +'</span>';
     varbut2 = 1;
 } else if (dictobj[cx][3] !== "adj" & c.includes("-") == true)  {
 document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c.substring(0,c.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + c.substring(c.lastIndexOf("-")+1,c.length) + '</span>';
-} else if (dictobj[cx][3] !== "adj" & c.includes("-") == false)  {
+} else if (dictobj[cx][3] !== "adj" & c.includes("-") == false & c.includes("%") == false)  {
     document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c +'</span>';
+} else if (dictobj[cx][3] !== "adj" & c.includes("%") == true & c.includes("-") == false)  {
+    document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c.substring(0,c.lastIndexOf("%")) + '</span> <span class="phrase-a">' + c.substring(c.lastIndexOf("%")+1) + '</span>';
 }
 
 document.getElementById("verif").disabled = false;
@@ -1023,6 +1105,11 @@ function genvocab() {
       for (let a = 0; a < vocabularyf.length; a++) {
          vocabularylist.push([vocabularyf[a], "", "adjective"]);
        }
+      // if (p.includes == "%") {
+       //    p1 = p.substring(p.lastIndexOf("%"));
+       //    p = p.substring(0,p.lastIndexOf("%"));
+       //    vocabularylist.push([p1, "", "adjective"]);
+       // }
         for (let a = 0; a < dictverbnom.length; a++) {
             let v = dictverbnom[a].slice();
             let p = v[0].slice();
@@ -1041,6 +1128,7 @@ function genvocab() {
        for (let a = 0; a < prestime.length; a++) {
            let v = prestime[a].slice();
            let p = v[0].slice();
+           let p1 = "";
            if (p.slice(-7) == " - minn") {
                p = p.slice(0,-7);
            } else if (p.slice(-7) == " - þinn") {
@@ -1121,6 +1209,11 @@ function genvocab() {
         for (let a = 0; a < dictobj.length; a++) {
             let v = dictobj[a].slice();
             let p = v[0].slice();
+            let q = "";
+            if (p.includes("%") == true) {
+                q = p.slice(p.indexOf("%")+1);
+                p = p.slice(0,p.indexOf("%"));
+            }
             if (p.slice(-7) == " - minn") {
                 p = p.slice(0,-7);
             } else if (p.slice(-7) == " - þinn") {
@@ -1133,12 +1226,15 @@ function genvocab() {
                 p = p.slice(0,-4);
             }
             vocabularylist.push([p, "", "nominal"]);
+            if (q !== "") {
+            vocabularylist.push([q, "", "adjective"]);
+            }
         }
 
 
         const seen = new Map();
         const uniqueList = vocabularylist.filter(item => {
-            const key = `${item[0]}|${item[1]}`; // Unique key combining English and Icelandic
+            const key = `${item[0]}|${item[1]}`;
             return seen.has(key) ? false : seen.set(key, true);
         });
         vocabularylist.length = 0;
@@ -1152,20 +1248,34 @@ function genvocab() {
     for (let c = 0; c < vocabularylist.length; c++) {
         var table = document.getElementById("sbroc");
         var row = table.insertRow(c);
+        if (Number.isInteger(c / 2) == true) {
+          row.style.backgroundColor = "#dddddd";
+        }
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        cell1.innerHTML = "<p>" + vocabularylist[c][0].charAt(0).toUpperCase() + vocabularylist[c][0].substring(1) + "</p>";
+        if (vocabularylist[c][2] == "nominal") {
+            cell1.innerHTML = '<p class="phrase-n">' + vocabularylist[c][0].charAt(0).toLowerCase() + vocabularylist[c][0].substring(1) + "</p>";
+        } else if (vocabularylist[c][2] == "adjective") {
+            cell1.innerHTML = '<p class="phrase-a">' + vocabularylist[c][0].charAt(0).toLowerCase() + vocabularylist[c][0].substring(1) + "</p>";
+        } else if (vocabularylist[c][2] == "verb") {
+            cell1.innerHTML = '<p class="phrase-v">' + vocabularylist[c][0].charAt(0).toLowerCase() + vocabularylist[c][0].substring(1) + "</p>";
+        } else if (vocabularylist[c][2] == "verb") {
+            cell1.innerHTML = '<p class="phrase-v">' + vocabularylist[c][0].charAt(0).toLowerCase() + vocabularylist[c][0].substring(1) + "</p>";
+        } else {
+        cell1.innerHTML = "<p>" + vocabularylist[c][0].charAt(0).toLowerCase() + vocabularylist[c][0].substring(1) + "</p>";
+        }
         cell2.innerHTML = "<p>" + vocabularylist[c][1] + "</p>";
         cell3.innerHTML = "<p>" + vocabularylist[c][2] + "</p>";
     }
     var table = document.getElementById("sbroc");
     var head = table.createTHead();
     var rowt = head.insertRow(c);
+    rowt.style.backgroundColor = "#4a90e2";
     var cell1a = rowt.insertCell(0);
     var cell2a = rowt.insertCell(1);
     var cell3a = rowt.insertCell(2);
     cell1a.innerHTML = "<p><b>Icelandic lemma</b></p>";
-    cell2a.innerHTML = "<p><b>English lemma</b></p>";
+    cell2a.innerHTML = "<p><b>English</b></p>";
     cell3a.innerHTML = "<p><b>Type</b></p>";
 }

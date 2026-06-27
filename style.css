@@ -18,9 +18,10 @@ h1 {
 }
 
 #sbroc td {
-width: 210px;
+width: 220px;
 border: none;
 text-align: left;
+padding: 6px;
 }
 
 #sbroc td p {
@@ -59,7 +60,7 @@ button {
     margin: 20px auto; /* Center the button */
 }
 
-#adjs, #adjo, #actb {
+#adjs, #adjo, #actb, #adjno {
     background-color: #dddddd;
     color: #000;
     border: none;
@@ -299,7 +300,7 @@ p {
 }
 
 .phrase-a {
-    background-color: #dddddd;
+    background-color: #f03085;
     color: #000000;
     padding: 4px 7px;
     border-radius: 4px;

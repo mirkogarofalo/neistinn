@@ -1,5 +1,5 @@
 // Neistinn - Sentence building trainer for learners of Icelandic - A1/B1 level
-// Ver 1.0.6 (Jun 2026)
+// Ver 1.0.7 (Jul 2026)
 // Author: Mirko Garofalo (mig@hi.is)
 
 // Preparation of the page

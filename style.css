@@ -1,20 +1,20 @@
-/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
     margin: 0 auto;
     padding: 10px;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-/* Header Styles */
 h1 {
     color: #4a90e2;
     text-align: left;
     margin-bottom: 30px;
     margin-top: 20px;
     font-size: 80px;
-    padding: 0px 0px 0px 0px;
+    padding: 0px;
 }
 
 #sbroc td {
@@ -30,8 +30,8 @@ font-size: 19px;
 
 hr {
     border: 0;
-    clear:both;
-    display:block;
+    clear: both;
+    display: block;
     width: 100%;
     background-color: #4a90e2;
     height: 1px;
@@ -39,14 +39,13 @@ hr {
 }
 
 #tit {
-    color: #111111;
-    text-align: left;
-    margin-bottom: 10px;
-    margin-top: 0px;
-    display: none;
+color: #111111;
+text-align: left;
+margin-bottom: 10px;
+margin-top: 0px;
+display: none;
 }
 
-/* Button Styles */
 button {
     background-color: #4a90e2;
     color: #fff;
@@ -56,61 +55,62 @@ button {
     font-size: 24px;
     cursor: pointer;
     transition: background-color 0.3s;
-    display: block; /* Change display to block for centering */
-    margin: 20px auto; /* Center the button */
+    display: block;
+    margin: 20px auto;
 }
 
 #adjs, #adjo, #actb, #adjno {
-    background-color: #dddddd;
-    color: #000;
-    border: none;
-    padding: 4px 7px;
-    border-radius: 4px;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    font-variant: small-caps;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 0px;
+background-color: #dddddd;
+color: #000;
+border: none;
+padding: 4px 7px;
+border-radius: 4px;
+display: inline-block;
+font-size: 16px;
+font-weight: bold;
+font-variant: small-caps;
+cursor: pointer;
+transition: background-color 0.3s;
+margin: 0px;
 }
 
 #adjs:disabled, #adjo:disabled, #actb:disabled {
-    background-color: #cccccc; /* Grey background */
-    color: #666666; /* Darker grey text */
-    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
-    opacity: 0.6; /* Slightly transparent effect */
+background-color: #cccccc;
+color: #666666;
+cursor: not-allowed;
+opacity: 0.6;
 }
 
 #adjs:hover, #adjo:hover, #actb:hover, button:hover {
-    background-color: #eeeeee;
+background-color: #eeeeee;
 }
 
 button:disabled {
-    background-color: #cccccc; /* Grey background */
-    color: #666666; /* Darker grey text */
-    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
-    opacity: 0.6; /* Slightly transparent effect */
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
-/* Flexbox Container */
 .container {
     display: flex;
     flex-direction: column;
-    width: 55%; /* Adjust width as needed */
-    margin-top: 20px;/* Space between */
+    width: 55%;
+    margin-top: 20px;
     background-color: #fff;
     margin: 20px;
     padding: 20px;
     border: 1px solid #666;
     border-radius: 10px;
+    box-sizing: border-box;
 }
 
 .containerx {
     display: flex;
     flex-direction: row;
-    width: 100%; 
+    width: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .side {
@@ -121,47 +121,52 @@ button:disabled {
     padding: 20px;
     border: 1px solid #666;
     border-radius: 10px;
+    box-sizing: border-box;
 }
 
 #textchron {
 height: 550px;
-overflow: scroll; /* Space between */
+overflow: scroll;
 }
 
-#total  {
-    margin-top: 0px; /* Space between */
-     margin: 20px;
-    padding: 20px;
-       background-color: #fff;
-        border: 1px solid #666;
-            border-radius: 10px;
+#total {
+margin-top: 0px;
+margin: 20px;
+padding: 20px;
+background-color: #fff;
+border: 1px solid #666;
+border-radius: 10px;
+box-sizing: border-box;
 }
 
-#author  {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #666;
-    border-radius: 10px;
+#author {
+display: flex;
+flex-direction: row;
+width: 100%;
+margin: auto;
+padding: 20px;
+background-color: #fff;
+border: 1px solid #666;
+border-radius: 10px;
+box-sizing: border-box;
 }
 
 #chron {
-    text-align: left; /* Correct alignment */
+text-align: left;
+width: 100%;
 }
 
 #chron td {
-    padding: 3px;
-    border: none;
-    text-align: left;
-    font-size: 16px;
+padding: 3px;
+border: none;
+text-align: left;
+font-size: 16px;
 }
 
 #maintab {
-    margin: auto;
-    width: 100%;
+margin: auto;
+width: 100%;
+table-layout: fixed;
 }
 
 #maintab td {
@@ -169,10 +174,11 @@ padding: 10px;
 border: 1px solid #ddd;
 text-align: left;
 font-size: 20px;
+word-wrap: break-word;
 }
 
 #maintab p {
-    font-size: 18px;
+font-size: 18px;
 }
 
 input[type="text"] {
@@ -182,9 +188,9 @@ input[type="text"] {
     font-size: 20px;
     text-align: left;
     width: 93%;
+    box-sizing: border-box;
 }
 
-/* Paragraph Styles */
 p {
     margin: 0;
     font-size: 18px;
@@ -196,31 +202,32 @@ p {
     color: #4a90e2;
 }
 
-/* Result Styles */
 #subjices, #verbices, #objices, #timices {
-    font-weight: bold;
-    font-size: 16px;
+font-weight: bold;
+font-size: 16px;
 }
 
 #subjeng, #verbeng, #objeng, #timeng {
-    font-style: normal;
+font-style: normal;
 }
 
 #mainline {
-    padding: 0px;
+padding: 0px;
+width: 100%;
 }
 
 #iconmain {
-    width: 90px;
-    margin-left: 0px;
-    padding: 0px;
+width: 90px;
+margin-left: 0px;
+padding: 0px;
 }
 
 #mainarea {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    padding: 20px 0px 0px 0px;
+display: flex;
+width: 100%;
+flex-direction: row;
+padding: 20px 0px 0px 0px;
+overflow-x: auto;
 }
 
 .parag {
@@ -228,27 +235,27 @@ p {
 }
 
 #mig {
-    width: 200px;
-    border-radius: 100px;
-    margin-right: 24px;
-    float: left;
+width: 200px;
+border-radius: 100px;
+margin-right: 24px;
+float: left;
 }
 
 #result {
-    font-weight: bold;
-    font-size: 30px;
+font-weight: bold;
+font-size: 30px;
 }
 
 #numbset {
-    background-color: #857fa0;
-    color: #ffffff;
-    padding: 5px 9px;
-    border-radius: 4px;
-    display: inline-block;
-    font-variant: small-caps;
-    font-weight: normal;
-    font-size: 45px;
-    letter-spacing: 0px;
+background-color: #857fa0;
+color: #ffffff;
+padding: 5px 9px;
+border-radius: 4px;
+display: inline-block;
+font-variant: small-caps;
+font-weight: normal;
+font-size: 45px;
+letter-spacing: 0px;
 }
 
 .phrase-n {
@@ -323,15 +330,252 @@ p {
     letter-spacing: 0px;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    button {
-        width: 100%; /* Optional: make buttons full width on small screens */
-        font-size: 18px;
+@media screen and (max-width: 768px) {
+    body {
+        padding: 5px;
+    }
+
+    .containerx {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .container, .side {
+        width: 100%;
+        margin: 5px 0;
+        padding: 8px;
+    }
+
+    .side {
+        width: 100%;
+    }
+
+    #iconmain {
+    width: 50px;
+    }
+
+    h1 {
+        font-size: 36px !important;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    h2 {
+        font-size: 14px !important;
+    }
+
+    #maintab {
+    width: 100%;
+    table-layout: fixed;
+    }
+
+    #maintab td {
+    padding: 4px 2px;
+    font-size: 12px;
+    }
+
+    #maintab p {
+    font-size: 12px;
     }
 
     input[type="text"] {
+        width: 95%;
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px 20px;
         width: 100%;
+    }
+
+    #butt12 p {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    }
+
+    #textchron {
+    height: 350px;
+    }
+
+    #chron td {
+    font-size: 12px;
+    padding: 2px;
+    }
+
+    .phrase-n, .phrase-a, .phrase-v, .phrase-pp, .phrase-p {
+        font-size: 11px;
+        padding: 2px 4px;
+    }
+
+    .phrase-c {
+        font-size: 10px;
+        padding: 2px 4px;
+    }
+
+    #mig {
+    width: 100px;
+    }
+
+    #result {
+    font-size: 20px;
+    }
+
+    #numbset {
+    font-size: 30px;
+    }
+
+    #adjs, #adjo {
+    background-color: #dddddd;
+    color: #000;
+    border: none;
+    padding: 3px 3px;
+    border-radius: 4px;
+    display: inline-block;
+    max-width: 31px;
+    font-size: 10px;
+    font-weight: bold;
+    font-variant: small-caps;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0px;
+    }
+
+    #adjno {
+    background-color: #dddddd;
+    color: #000;
+    border: none;
+    padding: 3px 3px;
+    border-radius: 4px;
+    display: inline-block;
+    max-width: 63px;
+    font-size: 10px;
+    font-weight: bold;
+    font-variant: small-caps;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0px;
+    }
+
+    #actb {
+    background-color: #dddddd;
+    color: #000;
+    border: none;
+    padding: 3px 3px;
+    border-radius: 4px;
+    display: inline-block;
+    max-width: 63px;
+    font-size: 10px;
+    font-weight: bold;
+    font-variant: small-caps;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0px;
+    }
+
+    #adjs:disabled, #adjo:disabled, #actb:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+    }
+
+    #adjs:hover, #adjo:hover, #actb:hover, button:hover {
+    background-color: #eeeeee;
     }
 }
 
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 28px !important;
+    }
+
+    #maintab td {
+    padding: 3px 1px;
+    font-size: 10px;
+    }
+
+    #maintab p {
+    font-size: 10px;
+    }
+
+    input[type="text"] {
+        width: 93%;
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    #chron td {
+    font-size: 10px;
+    }
+
+    .phrase-n, .phrase-a, .phrase-v, .phrase-pp, .phrase-p {
+        font-size: 9px;
+        padding: 1px 3px;
+    }
+
+    #adjs, #adjo {
+    background-color: #dddddd;
+    color: #000;
+    border: none;
+    padding: 3px 3px;
+    border-radius: 4px;
+    display: inline-block;
+    max-width: 31px;
+    font-size: 10px;
+    font-weight: bold;
+    font-variant: small-caps;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0px;
+    }
+
+    #adjno {
+    background-color: #dddddd;
+    color: #000;
+    border: none;
+    padding: 3px 3px;
+    border-radius: 4px;
+    display: inline-block;
+    max-width: 63px;
+    font-size: 10px;
+    font-weight: bold;
+    font-variant: small-caps;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0px;
+    }
+
+    #actb {
+    background-color: #dddddd;
+    color: #000;
+    border: none;
+    padding: 3px 3px;
+    border-radius: 4px;
+    display: inline-block;
+    max-width: 63px;
+    font-size: 10px;
+    font-weight: bold;
+    font-variant: small-caps;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0px;
+    }
+
+    #adjs:disabled, #adjo:disabled, #actb:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+    }
+
+    #adjs:hover, #adjo:hover, #actb:hover, button:hover {
+    background-color: #eeeeee;
+    }
+}

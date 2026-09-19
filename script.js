@@ -1,19 +1,28 @@
 // Neistinn - Sentence building trainer for learners of Icelandic - A1/B1 level
-// Ver 1.0.7 (Jul 2026)
+// Ver 1.1.5 (Sep 2026)
 // Author: Mirko Garofalo (mig@hi.is)
+
+const supabaseUrl = 'https://xecwezzuexvedzkxugqp.supabase.co';
+const supabaseKey = 'sb_publishable_-um5j516c_zNJAmYIdwrkA_5iPIH0Mz';
+const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // Preparation of the page
 
 let count;
 let totcorr;
+let countwithacc;
+let totcorrwithacc;
+
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("verif").disabled = true;
     document.getElementById("subjice").disabled = true;
-     document.getElementById("verbice").disabled = true;
-     document.getElementById("objice").disabled = true;
-     document.getElementById("timice").disabled = true;
-     count = 0;
-     totcorr = 0;
+    document.getElementById("verbice").disabled = true;
+    document.getElementById("objice").disabled = true;
+    document.getElementById("timice").disabled = true;
+    count = 0;
+    totcorr = 0;
+    countwithacc = 0;
+    totcorrwithacc = 0;
 
 });
 
@@ -43,7 +52,7 @@ let objb1dat = [];
 let objb1gen = [];
 
 const modalverbs = [
-["þurfa", "þarf", 5, 3, "þurf", "þurf", "þurft", "", "að", ["nt.", "þt."]],
+    ["þurfa", "þarf", 5, 3, "þurf", "þurf", "þurft", "", "að", ["nt.", "þt."]],
 ["vilja", "vil", 8, 2, "vil", "vil", "viljað", "", "", ["nt.", "þt."]],
 ["verða", "verð", 2, 4, "varð", "urð", "orðið", "", "að", ["nt.", "þt."]],
 ["mega", "má", 7, 3, "mát", "mát", "mátt", "", "", ["nt.", "þt."]],
@@ -53,7 +62,7 @@ const modalverbs = [
 ];
 
 const dictsubjnom = [
-["ég", "ég", 0],
+    ["ég", "ég", 0],
 ["þú", "þú", 1],
 ["hann", "hann", 2],
 ["hún", "hún", 2],
@@ -108,7 +117,7 @@ const dictsubjnom = [
 ];
 
 const dictsubjacc = [
-["ég", "mig", 2],
+    ["ég", "mig", 2],
 ["þú", "þig", 2],
 ["hann", "hann", 2],
 ["hún", "hana", 2],
@@ -163,7 +172,7 @@ const dictsubjacc = [
 ];
 
 const dictsubjdat = [
-["ég", "mér", 2],
+    ["ég", "mér", 2],
 ["þú", "þér", 2],
 ["hann", "honum", 2],
 ["hún", "henni", 2],
@@ -218,7 +227,7 @@ const dictsubjdat = [
 ];
 
 const vbendingspres = [
-["a", "ar", "ar", "um", "ið"],
+    ["a", "ar", "ar", "um", "ið"],
 ["i", "ir", "ir", "um", "ið"],
 ["", "ur", "ur", "um", "ið"],
 ["", "ð", "", "um", "ið"],
@@ -232,7 +241,7 @@ const vbendingspres = [
 ];
 
 const vbendingspast = [
-["aði", "aðir", "aði", "uðum", "uðuð","uðu"],
+    ["aði", "aðir", "aði", "uðum", "uðuð","uðu"],
 ["ði", "ðir", "ði", "ðum", "ðuð","ðu"],
 ["di", "dir", "di", "dum", "duð","du"],
 ["ti", "tir", "ti", "tum", "tuð","tu"],
@@ -247,7 +256,7 @@ const vbendingspast = [
 ];
 
 const dictverbnom = [
-["aðstoða", "aðstoð", 0, 0, "aðstoð", "aðstoð", "aðstoðað", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
+    ["aðstoða", "aðstoð", 0, 0, "aðstoð", "aðstoð", "aðstoðað", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 36, 37, 40], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["hjálpa", "hjálp", 0, 0, "hjálp", "hjálp", "hjálpað", [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 38, 39, 41], "", ["nt.", "þt.", "s.nt.", "s.þt.", "s.frt.", "nt.md.", "þt.md."], [""]],
 ["sakna", "sakn", 0, 0, "sakn", "sökn", "saknað", [20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", ["nt.", "þt."], [""]],
 ["sjá", "sé", 4, 5, "sá", "sá", "séð", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 30, 31, 36, 37, 64, 65, 66, 67, 89, 90, 122], "", ["nt.", "þt.", "nt.md.", "þt.md."], [""]],
@@ -286,18 +295,18 @@ const dictverbnom = [
 ];
 
 const dictverbacc = [
-["langa", "lang", 0, 0, "lang", "lang", "langað", [89, 123, 43, 45, 46, 132, 133, 134, 135, 136, 137], "í", ["nt.", "þt."]],
+    ["langa", "lang", 0, 0, "lang", "lang", "langað", [89, 123, 43, 45, 46, 132, 133, 134, 135, 136, 137], "í", ["nt.", "þt."]],
 ["vanta", "vant", 0, 0, "vant", "vant", "vantað", [64, 89, 65, 56, 57], "", ["nt.", "þt."]],
 ];
 
 const dictverbdat = [
     ["leiðast", "leið", 10, 8, "leid", "leid", "leiðst", [139, 140], "", ["nt.", "þt."]],
-    ["finnast", "finn", 6, 11, "fann", "fund", "fundist", [141, 142, 143, 144, 145, 146, 147], "", ["nt.", "þt."]],
-    ["þykja", "þyk", 1, 3, "þót", "þót", "þótt", [141, 142, 143, 144, 145, 146, 147], "", ["nt.", "þt."]],
+["finnast", "finn", 6, 11, "fann", "fund", "fundist", [141, 142, 143, 144, 145, 146, 147], "", ["nt.", "þt."]],
+["þykja", "þyk", 1, 3, "þót", "þót", "þótt", [141, 142, 143, 144, 145, 146, 147], "", ["nt.", "þt."]],
 ];
 
 const dictobj = [
-["ég", "mig", "þf.", 0],
+    ["ég", "mig", "þf.", 0],
 ["þú", "þig", "þf.", 1],
 ["hann", "hann", "þf.", 2],
 ["hún", "hana", "þf.", 3],
@@ -448,23 +457,23 @@ const dictobj = [
 ];
 
 const prestime = [
-["mánudagur (ft.)","á mánudögum", "þgf.", "á"],
-["þriðjudagur (ft.)","á þriðjudögum", "þgf.", "á"],
-["miðvikudagur (ft.)","á miðvikudögum", "þgf.", "á"],
-["fimmtudagur (ft.)","á fimmtudögum", "þgf.", "á"],
-["föstudagur (ft.)","á föstudögum", "þgf.", "á"],
-["laugardagur (ft.)","á laugardögum", "þgf.", "á"],
-["sunnudagur (ft.)","á sunnudögum", "þgf.", "á"],
-["helgi (ft.)","um helgar", "þf.", "um"],
-["kvöld+gr. (ft.)","á kvöldin", "þf.", "á"],
-["vinna+gr.", "í vinnunni", "þgf.", "í"],
+    ["mánudagur (ft.)","á mánudögum", "þgf.", "á"],
+    ["þriðjudagur (ft.)","á þriðjudögum", "þgf.", "á"],
+    ["miðvikudagur (ft.)","á miðvikudögum", "þgf.", "á"],
+    ["fimmtudagur (ft.)","á fimmtudögum", "þgf.", "á"],
+    ["föstudagur (ft.)","á föstudögum", "þgf.", "á"],
+    ["laugardagur (ft.)","á laugardögum", "þgf.", "á"],
+    ["sunnudagur (ft.)","á sunnudögum", "þgf.", "á"],
+    ["helgi (ft.)","um helgar", "þf.", "um"],
+    ["kvöld+gr. (ft.)","á kvöldin", "þf.", "á"],
+    ["vinna+gr.", "í vinnunni", "þgf.", "í"],
 ["veitingastaður+gr.", "á veitingastaðnum", "þgf.", "á"],
 ["skrifstofa+gr.", "á skrifstofunni", "þgf.", "á"],
 ["kaffihús+gr.", "á kaffihúsinu", "þgf.", "á"],
 ];
 
 const pasttime = [
-["mánudagur+gr.","á mánudaginn", "þf.", "á"],
+    ["mánudagur+gr.","á mánudaginn", "þf.", "á"],
 ["þriðjudagur+gr.","á þriðjudaginn", "þf.", "á"],
 ["miðvikudagur+gr.","á miðvikudaginn", "þf.", "á"],
 ["fimmtudagur+gr.","á fimmtudaginn", "þf.", "á"],
@@ -482,7 +491,7 @@ const pasttime = [
 ];
 
 const presprtime = [
-["dagur", "í dag", "þf.", "í"],
+    ["dagur", "í dag", "þf.", "í"],
 ["vika", "í þessari viku", "þgf.", "í", "þessi"],
 ["vinna+gr.", "í vinnunni", "þgf.", "í"],
 ["veitingastaður+gr.", "á veitingastaðnum", "þgf.", "á"],
@@ -491,7 +500,7 @@ const presprtime = [
 ];
 
 const pastprtime = [
-["mánudagur+gr.","á mánudaginn", "þf.", "á"],
+    ["mánudagur+gr.","á mánudaginn", "þf.", "á"],
 ["þriðjudagur+gr.","á þriðjudaginn", "þf.", "á"],
 ["miðvikudagur+gr.","á miðvikudaginn", "þf.", "á"],
 ["fimmtudagur+gr.","á fimmtudaginn", "þf.", "á"],
@@ -505,7 +514,7 @@ const pastprtime = [
 ];
 
 const futtime = [
-["mánudagur+gr.","á mánudaginn", "þf.", "á"],
+    ["mánudagur+gr.","á mánudaginn", "þf.", "á"],
 ["þriðjudagur+gr.","á þriðjudaginn", "þf.", "á"],
 ["miðvikudagur+gr.","á miðvikudaginn", "þf.", "á"],
 ["fimmtudagur+gr.","á fimmtudaginn", "þf.", "á"],
@@ -577,175 +586,173 @@ document.getElementById("timeng").innerHTML = "-";
 document.getElementById("timice").value = "";
 
 function generate() {
-if (count > 0) {
-chronol();
-}
-dictsubj.length = 0;
-dictverb.length = 0;
-dicttimepl.length = 0;
-randgenind = Math.floor(Math.random() * 11);
-if (randgenind == 9) {
-    dictsubj = [...dictsubjacc];
-    dictverb = [...dictverbacc];
-    casesubj = "þf.";
+    if (count > 0) {
+        chronol();
+    }
+    dictsubj.length = 0;
+    dictverb.length = 0;
+    dicttimepl.length = 0;
+    randgenind = Math.floor(Math.random() * 11);
+    if (randgenind == 9) {
+        dictsubj = [...dictsubjacc];
+        dictverb = [...dictverbacc];
+        casesubj = "þf.";
 
-} else if (randgenind == 10) {
-    dictsubj = [...dictsubjdat];
-    dictverb = [...dictverbdat];
-    casesubj = "þgf.";
-} else {
-    dictsubj = [...dictsubjnom];
-    dictverb = [...dictverbnom];
-    casesubj = "nf.";
-}
-adjs = "";
-trim1 = "";
-trim2 = "";
-adjsice = "";
-adjo = "";
-trim3 = "";
-trim4 = "";
-adjoice = "";
-vartimepl = "";
-vartimepleng = "";
-varbut1 = 0;
-varbut2 = 0;
-document.getElementById("subjice").value = "";
-document.getElementById("verbice").value = "";
-document.getElementById("objice").value = "";
-document.getElementById("timice").value = "";
-document.getElementById("subjice").style.color = "#000000";
-document.getElementById("verbice").style.color = "#000000";
-document.getElementById("objice").style.color = "#000000";
-document.getElementById("timice").style.color = "#000000";
-document.getElementById("subjices").innerHTML = "-";
-document.getElementById("verbices").innerHTML = "-";
-document.getElementById("objices").innerHTML = "-";
-document.getElementById("timices").innerHTML = "-";
-document.getElementById("subjices").style.color = "#000000";
-document.getElementById("verbices").style.color = "#000000";
-document.getElementById("objices").style.color = "#000000";
-document.getElementById("timices").style.color = "#000000";
-document.getElementById("subjice").disabled = false;
-document.getElementById("verbice").disabled = false;
-document.getElementById("objice").disabled = false;
-//document.getElementById("timice").disabled = true;
-randindex1 = Math.floor(Math.random() * dictsubj.length);
-randindex2 = Math.floor(Math.random() * dictverb.length);
-randindex3 = Math.floor(Math.random() * dictverb[randindex2][7].length);
+    } else if (randgenind == 10) {
+        dictsubj = [...dictsubjdat];
+        dictverb = [...dictverbdat];
+        casesubj = "þgf.";
+    } else {
+        dictsubj = [...dictsubjnom];
+        dictverb = [...dictverbnom];
+        casesubj = "nf.";
+    }
+    adjs = "";
+    trim1 = "";
+    trim2 = "";
+    adjsice = "";
+    adjo = "";
+    trim3 = "";
+    trim4 = "";
+    adjoice = "";
+    vartimepl = "";
+    vartimepleng = "";
+    varbut1 = 0;
+    varbut2 = 0;
+    document.getElementById("subjice").value = "";
+    document.getElementById("verbice").value = "";
+    document.getElementById("objice").value = "";
+    document.getElementById("timice").value = "";
+    document.getElementById("subjice").style.color = "#000000";
+    document.getElementById("verbice").style.color = "#000000";
+    document.getElementById("objice").style.color = "#000000";
+    document.getElementById("timice").style.color = "#000000";
+    document.getElementById("subjices").innerHTML = "-";
+    document.getElementById("verbices").innerHTML = "-";
+    document.getElementById("objices").innerHTML = "-";
+    document.getElementById("timices").innerHTML = "-";
+    document.getElementById("subjices").style.color = "#000000";
+    document.getElementById("verbices").style.color = "#000000";
+    document.getElementById("objices").style.color = "#000000";
+    document.getElementById("timices").style.color = "#000000";
+    document.getElementById("subjice").disabled = false;
+    document.getElementById("verbice").disabled = false;
+    document.getElementById("objice").disabled = false;
+    randindex1 = Math.floor(Math.random() * dictsubj.length);
+    randindex2 = Math.floor(Math.random() * dictverb.length);
+    randindex3 = Math.floor(Math.random() * dictverb[randindex2][7].length);
 
-a = dictsubj[randindex1][0];
-b = [dictverb[randindex2][0],dictverb[randindex2][1],dictverb[randindex2][2],dictverb[randindex2][3],dictverb[randindex2][4],dictverb[randindex2][5],dictverb[randindex2][6]];
+    a = dictsubj[randindex1][0];
+    b = [dictverb[randindex2][0],dictverb[randindex2][1],dictverb[randindex2][2],dictverb[randindex2][3],dictverb[randindex2][4],dictverb[randindex2][5],dictverb[randindex2][6]];
 
-randindex5 = Math.floor(Math.random() * dictverb[randindex2][9].length);
-pooltense = dictverb[randindex2][9];
-verbfinalpattern(b, pooltense, randindex5);
+    randindex5 = Math.floor(Math.random() * dictverb[randindex2][9].length);
+    pooltense = dictverb[randindex2][9];
+    verbfinalpattern(b, pooltense, randindex5);
 
-vbchoice = arrv[dictsubj[randindex1][2]];
-cx = dictverb[randindex2][7][randindex3];
-c = dictobj[cx][0];
-trim1 = dictverb[randindex2][0];
-
-if (dictsubj[randindex1][3] == "adj" & a.includes("-") == true) {
-document.getElementById("subjeng").innerHTML = '<button id="adjs" onclick="addadjs()">+adj</button> <span class="phrase-n">' + a.substring(0,a.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + a.substring(a.lastIndexOf("-")+1,a.length) + '</span>';
-varbut1 = 1;
-} else if (dictsubj[randindex1][3] == "adj" & a.includes("-") == false) {
-    document.getElementById("subjeng").innerHTML = '<button id="adjs" onclick="addadjs()">+adj</button> <span class="phrase-n">' + a +'</span>';
-    varbut1 = 1;
-} else if (dictsubj[randindex1][3] !== "adj" & a.includes("-") == true) {
-document.getElementById("subjeng").innerHTML = '<span class="phrase-n">' + a.substring(0,a.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + a.substring(a.lastIndexOf("-")+1,a.length) + '</span>';
-} else if (dictsubj[randindex1][3] !== "adj" & a.includes("-") == false) {
-    document.getElementById("subjeng").innerHTML = '<span class="phrase-n">' + a +'</span>';
-}
-
-if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "s.nt.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">vera (nt.)</span> <span class="phrase-v">' + trim1 + '</span>';
-} else if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "s.þt.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">vera (þt.)</span> <span class="phrase-v">' + trim1 + '</span>';
-} else if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "s.frt.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">ætla (nt.)</span> <span class="phrase-v">' + trim1 + '</span>';
-} else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "s.nt.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">vera (nt.)</span> <span class="phrase-v">' + trim1 + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
-    vbchoice = vbchoice + " " + dictverb[randindex2][8];
-}  else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "s.þt.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">vera (þt.)</span> <span class="phrase-v">' + trim1 + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
-    vbchoice = vbchoice + " " + dictverb[randindex2][8];
-} else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "s.frt.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">ætla (nt.)</span> <span class="phrase-v">' + trim1 + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
-    vbchoice = vbchoice + " " + dictverb[randindex2][8];
-} else if (dictverb[randindex2][8] == "" & pooltense[randindex5].substring(0,1) !== "" & pooltense[randindex5] !== "nt.md." & pooltense[randindex5] !== "þt.md.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + trim1 + " (" + pooltense[randindex5] + ')</span>';
-} else if (dictverb[randindex2][8] !== "" & pooltense[randindex5].substring(0,2) !== "s." & pooltense[randindex5] !== "nt.md."  & pooltense[randindex5] !== "þt.md.") {
+    vbchoice = arrv[dictsubj[randindex1][2]];
+    cx = dictverb[randindex2][7][randindex3];
+    c = dictobj[cx][0];
     trim1 = dictverb[randindex2][0];
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + trim1 + " (" + pooltense[randindex5] + ')</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
-    vbchoice = vbchoice + " " + dictverb[randindex2][8];
-} else if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "nt.md.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + verba[0] + ' (nt.)</span> <span class="phrase-v">' + dictverb[randindex2][0] + '</span>';
-    vbchoice = vbchoice + " " + dictverb[randindex2][8];
-} else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "nt.md.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + verba[0] + ' (nt.)</span> <span class="phrase-v">' + dictverb[randindex2][0] + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
-    vbchoice = vbchoice + " " + dictverb[randindex2][8];
-} else if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "þt.md.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + verba[0] + ' (þt.)</span> <span class="phrase-v">' + dictverb[randindex2][0] + '</span>';
-    vbchoice = vbchoice + " " + dictverb[randindex2][8];
-} else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "þt.md.") {
-    document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + verba[0] + ' (þt.)</span> <span class="phrase-v">' + dictverb[randindex2][0] + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
-    vbchoice = vbchoice + " " + dictverb[randindex2][8];
-}
+
+    if (dictsubj[randindex1][3] == "adj" & a.includes("-") == true) {
+        document.getElementById("subjeng").innerHTML = '<button id="adjs" onclick="addadjs()">+adj</button> <span class="phrase-n">' + a.substring(0,a.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + a.substring(a.lastIndexOf("-")+1,a.length) + '</span>';
+        varbut1 = 1;
+    } else if (dictsubj[randindex1][3] == "adj" & a.includes("-") == false) {
+        document.getElementById("subjeng").innerHTML = '<button id="adjs" onclick="addadjs()">+adj</button> <span class="phrase-n">' + a +'</span>';
+        varbut1 = 1;
+    } else if (dictsubj[randindex1][3] !== "adj" & a.includes("-") == true) {
+        document.getElementById("subjeng").innerHTML = '<span class="phrase-n">' + a.substring(0,a.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + a.substring(a.lastIndexOf("-")+1,a.length) + '</span>';
+    } else if (dictsubj[randindex1][3] !== "adj" & a.includes("-") == false) {
+        document.getElementById("subjeng").innerHTML = '<span class="phrase-n">' + a +'</span>';
+    }
+
+    if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "s.nt.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">vera (nt.)</span> <span class="phrase-v">' + trim1 + '</span>';
+    } else if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "s.þt.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">vera (þt.)</span> <span class="phrase-v">' + trim1 + '</span>';
+    } else if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "s.frt.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">ætla (nt.)</span> <span class="phrase-v">' + trim1 + '</span>';
+    } else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "s.nt.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">vera (nt.)</span> <span class="phrase-v">' + trim1 + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
+        vbchoice = vbchoice + " " + dictverb[randindex2][8];
+    }  else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "s.þt.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">vera (þt.)</span> <span class="phrase-v">' + trim1 + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
+        vbchoice = vbchoice + " " + dictverb[randindex2][8];
+    } else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "s.frt.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">ætla (nt.)</span> <span class="phrase-v">' + trim1 + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
+        vbchoice = vbchoice + " " + dictverb[randindex2][8];
+    } else if (dictverb[randindex2][8] == "" & pooltense[randindex5].substring(0,1) !== "" & pooltense[randindex5] !== "nt.md." & pooltense[randindex5] !== "þt.md.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + trim1 + " (" + pooltense[randindex5] + ')</span>';
+    } else if (dictverb[randindex2][8] !== "" & pooltense[randindex5].substring(0,2) !== "s." & pooltense[randindex5] !== "nt.md."  & pooltense[randindex5] !== "þt.md.") {
+        trim1 = dictverb[randindex2][0];
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + trim1 + " (" + pooltense[randindex5] + ')</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
+        vbchoice = vbchoice + " " + dictverb[randindex2][8];
+    } else if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "nt.md.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + verba[0] + ' (nt.)</span> <span class="phrase-v">' + dictverb[randindex2][0] + '</span>';
+        vbchoice = vbchoice + " " + dictverb[randindex2][8];
+    } else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "nt.md.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + verba[0] + ' (nt.)</span> <span class="phrase-v">' + dictverb[randindex2][0] + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
+        vbchoice = vbchoice + " " + dictverb[randindex2][8];
+    } else if (dictverb[randindex2][8] == "" & pooltense[randindex5] == "þt.md.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + verba[0] + ' (þt.)</span> <span class="phrase-v">' + dictverb[randindex2][0] + '</span>';
+        vbchoice = vbchoice + " " + dictverb[randindex2][8];
+    } else if (dictverb[randindex2][8] !== "" & pooltense[randindex5] == "þt.md.") {
+        document.getElementById("verbeng").innerHTML = '<span class="phrase-v">' + verba[0] + ' (þt.)</span> <span class="phrase-v">' + dictverb[randindex2][0] + '</span> <span class="phrase-pp">' + dictverb[randindex2][8] + '</span>';
+        vbchoice = vbchoice + " " + dictverb[randindex2][8];
+    }
 
 
-if (dictobj[cx][3] == "adj" & c.includes("-") == true & c.includes("%") == false) {
-document.getElementById("objeng").innerHTML = '<button id="adjo" onclick="addadjo()">+adj</button> <span class="phrase-n">' + c.substring(0,c.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + c.substring(c.lastIndexOf("-")+1,c.length) + '</span>';
-varbut2 = 1;
-} else if (dictobj[cx][3] == "adj" & c.includes("-") == false & c.includes("%") == false) {
-    document.getElementById("objeng").innerHTML = '<button id="adjo" onclick="addadjo()">+adj</button> <span class="phrase-n">' + c +'</span>';
-    varbut2 = 1;
-} else if (dictobj[cx][3] !== "adj" & c.includes("-") == true)  {
-document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c.substring(0,c.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + c.substring(c.lastIndexOf("-")+1,c.length) + '</span>';
-} else if (dictobj[cx][3] !== "adj" & c.includes("-") == false & c.includes("%") == false)  {
-    document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c +'</span>';
-} else if (dictobj[cx][3] !== "adj" & c.includes("%") == true & c.includes("-") == false)  {
-    document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c.substring(0,c.lastIndexOf("%")) + '</span> <span class="phrase-a">' + c.substring(c.lastIndexOf("%")+1) + '</span>';
-}
+    if (dictobj[cx][3] == "adj" & c.includes("-") == true & c.includes("%") == false) {
+        document.getElementById("objeng").innerHTML = '<button id="adjo" onclick="addadjo()">+adj</button> <span class="phrase-n">' + c.substring(0,c.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + c.substring(c.lastIndexOf("-")+1,c.length) + '</span>';
+        varbut2 = 1;
+    } else if (dictobj[cx][3] == "adj" & c.includes("-") == false & c.includes("%") == false) {
+        document.getElementById("objeng").innerHTML = '<button id="adjo" onclick="addadjo()">+adj</button> <span class="phrase-n">' + c +'</span>';
+        varbut2 = 1;
+    } else if (dictobj[cx][3] !== "adj" & c.includes("-") == true)  {
+        document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c.substring(0,c.lastIndexOf("-")-1) +'</span> <span class="phrase-p">' + c.substring(c.lastIndexOf("-")+1,c.length) + '</span>';
+    } else if (dictobj[cx][3] !== "adj" & c.includes("-") == false & c.includes("%") == false)  {
+        document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c +'</span>';
+    } else if (dictobj[cx][3] !== "adj" & c.includes("%") == true & c.includes("-") == false)  {
+        document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c.substring(0,c.lastIndexOf("%")) + '</span> <span class="phrase-a">' + c.substring(c.lastIndexOf("%")+1) + '</span>';
+    }
 
-document.getElementById("verif").disabled = false;
-document.getElementById("subjice").disabled = false;
-document.getElementById("verbice").disabled = false;
-document.getElementById("objice").disabled = false;
-//document.getElementById("timice").disabled = false;
-document.getElementById("gener").disabled = true;
-document.getElementById("timeng").innerHTML = '<button id="actb" onclick="activetime()">+time/place</button>';
-count++;
+    document.getElementById("verif").disabled = false;
+    document.getElementById("subjice").disabled = false;
+    document.getElementById("verbice").disabled = false;
+    document.getElementById("objice").disabled = false;
+    document.getElementById("gener").disabled = true;
+    document.getElementById("timeng").innerHTML = '<button id="actb" onclick="activetime()">+time/place</button>';
+    count++;
 }
 
 function activetime() {
-if (pooltense[randindex5] == "nt.") {
-    dicttimepl = [...prestime];
-} else if (pooltense[randindex5] == "þt.") {
-    dicttimepl = [...pasttime];
-} else if (pooltense[randindex5] == "s.nt.") {
-    dicttimepl = [...presprtime];
-} else if (pooltense[randindex5] == "s.þt.") {
-    dicttimepl = [...pastprtime];
-} else if (pooltense[randindex5] == "s.frt.") {
-    dicttimepl = [...futtime];
-} else if (pooltense[randindex5] == "nt.md.") {
-    dicttimepl = [...prestime];
-} else if (pooltense[randindex5] == "þt.md.") {
-    dicttimepl = [...pasttime];
-}
+    if (pooltense[randindex5] == "nt.") {
+        dicttimepl = [...prestime];
+    } else if (pooltense[randindex5] == "þt.") {
+        dicttimepl = [...pasttime];
+    } else if (pooltense[randindex5] == "s.nt.") {
+        dicttimepl = [...presprtime];
+    } else if (pooltense[randindex5] == "s.þt.") {
+        dicttimepl = [...pastprtime];
+    } else if (pooltense[randindex5] == "s.frt.") {
+        dicttimepl = [...futtime];
+    } else if (pooltense[randindex5] == "nt.md.") {
+        dicttimepl = [...prestime];
+    } else if (pooltense[randindex5] == "þt.md.") {
+        dicttimepl = [...pasttime];
+    }
 
-randindex6 = Math.floor(Math.random() * dicttimepl.length);
+    randindex6 = Math.floor(Math.random() * dicttimepl.length);
 
-vartimepleng = dicttimepl[randindex6][1];
-if (dicttimepl[randindex6][4] !== undefined) {
-    vartimepl = '<span class="phrase-pp">' + dicttimepl[randindex6][3] + '</span> <span class="phrase-n">' + dicttimepl[randindex6][4] + '</span> <span class="phrase-n">' + dicttimepl[randindex6][0] + '</span>';
-} else {
-    vartimepl = '<span class="phrase-pp">' + dicttimepl[randindex6][3] + '</span> <span class="phrase-n">' + dicttimepl[randindex6][0] + '</span>';
-}
+    vartimepleng = dicttimepl[randindex6][1];
+    if (dicttimepl[randindex6][4] !== undefined) {
+        vartimepl = '<span class="phrase-pp">' + dicttimepl[randindex6][3] + '</span> <span class="phrase-n">' + dicttimepl[randindex6][4] + '</span> <span class="phrase-n">' + dicttimepl[randindex6][0] + '</span>';
+    } else {
+        vartimepl = '<span class="phrase-pp">' + dicttimepl[randindex6][3] + '</span> <span class="phrase-n">' + dicttimepl[randindex6][0] + '</span>';
+    }
 
-document.getElementById("timeng").innerHTML = vartimepl;
-document.getElementById("timice").disabled = false;
+    document.getElementById("timeng").innerHTML = vartimepl;
+    document.getElementById("timice").disabled = false;
 }
 
 function verbfinalpattern(x, t, y) {
@@ -758,13 +765,13 @@ function verbfinalpattern(x, t, y) {
     } else if (t[y] == "nt." & x[2] !== 0) {
         let inf = x[0].slice(0,x.lastIndexOf("a"));
         if (inf.split("a").length-1 == 1) {
-        inf = inf.replace("a", "ö");
+            inf = inf.replace("a", "ö");
         }
         arrv = [x[1] + vbendingspres[x[2]][0], x[1] + vbendingspres[x[2]][1], x[1] + vbendingspres[x[2]][2], inf + vbendingspres[x[2]][3], inf + vbendingspres[x[2]][4], x[0]];
     } else if (t[y] == "þt.") {
         let inf = x[0].slice(0,x.lastIndexOf("a"));
         if (inf.split("a").length-1 == 1) {
-        inf = inf.replace("a", "ö");
+            inf = inf.replace("a", "ö");
         }
         arrv = [x[4] + vbendingspast[x[3]][0], x[4] + vbendingspast[x[3]][1], x[4] + vbendingspast[x[3]][2], x[5] + vbendingspast[x[3]][3], x[5] + vbendingspast[x[3]][4], x[5] + vbendingspast[x[3]][5]];
     } else if (t[y] == "s.nt.") {
@@ -777,10 +784,12 @@ function verbfinalpattern(x, t, y) {
         randindexmod = Math.floor(Math.random() * modalverbs.length);
         verba = modalverbs[randindexmod].slice();
         let inf = verba[0].slice(0,x.lastIndexOf("a"));
-        if (verba[0] == "geta" || verba[0] == "hafa") {
+        if (verba[0] == "geta") {
             arrv = [verba[1] + vbendingspres[verba[2]][0] +  " " + x[6], verba[1] + vbendingspres[verba[2]][1] + " " + x[6], verba[1] + vbendingspres[verba[2]][2] + " " + x[6], inf + vbendingspres[verba[2]][3] + " " + x[6], inf + vbendingspres[verba[2]][4] + " " + x[6], verba[0] + " " + x[6]];
+        } else if (verba[0] == "hafa") {
+            arrv = [verba[1] + vbendingspres[verba[2]][0] +  " " + x[6], verba[1] + vbendingspres[verba[2]][1] + " " + x[6], verba[1] + vbendingspres[verba[2]][2] + " " + x[6], "höf" + vbendingspres[verba[2]][3] + " " + x[6], inf + vbendingspres[verba[2]][4] + " " + x[6], verba[0] + " " + x[6]];
         } else {
-        arrv = [verba[1] + vbendingspres[verba[2]][0] + " " + verba[8] + " " + x[0], verba[1] + vbendingspres[verba[2]][1] + " " + verba[8] + " " + x[0], verba[1] + vbendingspres[verba[2]][2] + " " + verba[8] + " " + x[0], inf + vbendingspres[verba[2]][3] + " " + verba[8] + " " + x[0], inf + vbendingspres[verba[2]][4] + " " + verba[8] + " " + x[0], verba[0] + " " + verba[8] + " " + x[0]];
+            arrv = [verba[1] + vbendingspres[verba[2]][0] + " " + verba[8] + " " + x[0], verba[1] + vbendingspres[verba[2]][1] + " " + verba[8] + " " + x[0], verba[1] + vbendingspres[verba[2]][2] + " " + verba[8] + " " + x[0], inf + vbendingspres[verba[2]][3] + " " + verba[8] + " " + x[0], inf + vbendingspres[verba[2]][4] + " " + verba[8] + " " + x[0], verba[0] + " " + verba[8] + " " + x[0]];
         }
     } else if (t[y] == "þt.md.") {
         randindexmod = Math.floor(Math.random() * modalverbs.length);
@@ -797,239 +806,272 @@ function verbfinalpattern(x, t, y) {
 // Functions: adding adjectives to subjects and objects
 
 function addadjs() {
-document.getElementById("adjs").remove();
-let f = document.getElementById("subjeng").innerHTML;
-randadjsn = Math.floor(Math.random() * dictsubj[randindex1][5].length);
-randadjs = dictsubj[randindex1][5][randadjsn];
-adjsice = dictsubj[randindex1][4][randadjsn];
-document.getElementById("subjeng").innerHTML = '<span class="phrase-a">' + randadjs + '</span> ' + f;
+    document.getElementById("adjs").remove();
+    let f = document.getElementById("subjeng").innerHTML;
+    randadjsn = Math.floor(Math.random() * dictsubj[randindex1][5].length);
+    randadjs = dictsubj[randindex1][5][randadjsn];
+    adjsice = dictsubj[randindex1][4][randadjsn];
+    document.getElementById("subjeng").innerHTML = '<span class="phrase-a">' + randadjs + '</span> ' + f;
 }
 
 function addadjo() {
-document.getElementById("adjo").remove();
-let f = document.getElementById("objeng").innerHTML;
-randadjon = Math.floor(Math.random() * dictobj[cx][5].length);
-randadjo = dictobj[cx][5][randadjon];
-adjoice = dictobj[cx][4][randadjon];
-document.getElementById("objeng").innerHTML = '<span class="phrase-a">' + randadjo + '</span> ' + f;
+    document.getElementById("adjo").remove();
+    let f = document.getElementById("objeng").innerHTML;
+    randadjon = Math.floor(Math.random() * dictobj[cx][5].length);
+    randadjo = dictobj[cx][5][randadjon];
+    adjoice = dictobj[cx][4][randadjon];
+    document.getElementById("objeng").innerHTML = '<span class="phrase-a">' + randadjo + '</span> ' + f;
 }
 
 // Functions: copying sentences into the chronological list on the side
 
-function chronol() {
-document.getElementById("tit").style.display = "block";
-let a1 = document.getElementById("subjices").innerHTML;
-let a2 = document.getElementById("verbices").innerHTML;
-let a3 = document.getElementById("objices").innerHTML;
-let a4 = document.getElementById("timices").innerHTML;
-let c1 = document.getElementById("subjeng").innerHTML;
-let c2 = document.getElementById("verbeng").innerHTML;
-let c3 = document.getElementById("objeng").innerHTML;
-let c4 = document.getElementById("timeng").innerHTML;
-let tabx = document.getElementById("chron");
-var row1 = tabx.insertRow();
-var cell1 = row1.insertCell();
-cell1.innerHTML = count;
-var cell2 = row1.insertCell();
-cell2.innerHTML = c1;
-var cell3 = row1.insertCell();
-var cell4 = row1.insertCell();
-var cell5 = row1.insertCell();
-cell3.innerHTML = c2;
-cell4.innerHTML = c3;
-cell5.innerHTML = c4;
-var row3 = tabx.insertRow();
-row3.insertCell();
-var cell8 = row3.insertCell();
-var cell9 = row3.insertCell();
-var cell10 = row3.insertCell();
-var cell11 = row3.insertCell();
-cell8.innerHTML = a1;
-cell9.innerHTML = a2;
-cell10.innerHTML = a3;
-cell11.innerHTML = a4;
-if (document.getElementById("subjices").style.color !== "rgb(0, 255, 0)" || document.getElementById("verbices").style.color !== "rgb(0, 255, 0)" || document.getElementById("objices").style.color !== "rgb(0, 255, 0)" || document.getElementById("timices").style.color !== "rgb(0, 255, 0)") {
-cell8.style.color = "#FF0000";
-cell9.style.color = "#FF0000";
-cell10.style.color = "#FF0000";
-cell11.style.color = "#FF0000";
-cell8.style.fontWeight = "bold";
-cell9.style.fontWeight = "bold";
-cell10.style.fontWeight = "bold";
-cell11.style.fontWeight = "bold";
-} else if (document.getElementById("subjices").style.color == "rgb(0, 255, 0)" && document.getElementById("verbices").style.color == "rgb(0, 255, 0)" && document.getElementById("subjices").style.color == "rgb(0, 255, 0)" && document.getElementById("timices").style.color == "rgb(0, 255, 0)") {
-cell8.style.color = "#00ff00";
-cell9.style.color = "#00ff00";
-cell10.style.color = "#00ff00";
-cell11.style.color = "#00ff00";
-cell8.style.fontWeight = "bold";
-cell9.style.fontWeight = "bold";
-cell10.style.fontWeight = "bold";
-cell11.style.fontWeight = "bold";
-totcorr++;
-if (Number.isInteger(totcorr / 10) == true & totcorr !== 0) {
-    let mess = document.getElementById("result").innerHTML;
-    let wordisl = ["Frábært!", "Koma svo!", "Flott!", "Ljómandi!", "Gott!"];
-    let rnd = Math.floor(Math.random() * wordisl.length);
-    document.getElementById("result").innerHTML = wordisl[rnd] + " " + mess + '<span id="numbset">' + totcorr + "</span> sentences!";
-    document.getElementById("messagearea").style.display = "block";
-    document.getElementById("mainarea").style.display = "none";
-    document.getElementById("butt12").style.display = "none";
+async function chronol() {
+    document.getElementById("tit").style.display = "block";
+    let a1 = document.getElementById("subjices").innerHTML;
+    let a2 = document.getElementById("verbices").innerHTML;
+    let a3 = document.getElementById("objices").innerHTML;
+    let a4 = document.getElementById("timices").innerHTML;
+    let c1 = document.getElementById("subjeng").innerHTML;
+    let c2 = document.getElementById("verbeng").innerHTML;
+    let c3 = document.getElementById("objeng").innerHTML;
+    let c4 = document.getElementById("timeng").innerHTML;
+    let tabx = document.getElementById("chron");
+
+    var row1 = tabx.insertRow();
+    var cell1 = row1.insertCell();
+
+    let sentenceIndex = Math.floor((tabx.rows.length - 1) / 2) + 1;
+    cell1.innerHTML = sentenceIndex;
+
+    var cell2 = row1.insertCell();
+    cell2.innerHTML = c1;
+    var cell3 = row1.insertCell();
+    var cell4 = row1.insertCell();
+    var cell5 = row1.insertCell();
+    cell3.innerHTML = c2;
+    cell4.innerHTML = c3;
+    cell5.innerHTML = c4;
+
+    var row3 = tabx.insertRow();
+    row3.insertCell();
+    var cell8 = row3.insertCell();
+    var cell9 = row3.insertCell();
+    var cell10 = row3.insertCell();
+    var cell11 = row3.insertCell();
+    cell8.innerHTML = a1;
+    cell9.innerHTML = a2;
+    cell10.innerHTML = a3;
+    cell11.innerHTML = a4;
+
+    if (document.getElementById("subjices").style.color !== "rgb(0, 255, 0)" ||
+        document.getElementById("verbices").style.color !== "rgb(0, 255, 0)" ||
+        document.getElementById("objices").style.color !== "rgb(0, 255, 0)" ||
+        document.getElementById("timices").style.color !== "rgb(0, 255, 0)") {
+
+        cell8.style.color = "#FF0000";
+    cell9.style.color = "#FF0000";
+    cell10.style.color = "#FF0000";
+    cell11.style.color = "#FF0000";
+    cell8.style.fontWeight = "bold";
+    cell9.style.fontWeight = "bold";
+    cell10.style.fontWeight = "bold";
+    cell11.style.fontWeight = "bold";
+
+    countwithacc++;
+
+        } else if (document.getElementById("subjices").style.color == "rgb(0, 255, 0)" &&
+            document.getElementById("verbices").style.color == "rgb(0, 255, 0)" &&
+            document.getElementById("objices").style.color == "rgb(0, 255, 0)" &&
+            document.getElementById("timices").style.color == "rgb(0, 255, 0)") {
+
+            cell8.style.color = "#00ff00";
+        cell9.style.color = "#00ff00";
+        cell10.style.color = "#00ff00";
+        cell11.style.color = "#00ff00";
+        cell8.style.fontWeight = "bold";
+        cell9.style.fontWeight = "bold";
+        cell10.style.fontWeight = "bold";
+        cell11.style.fontWeight = "bold";
+
+        totcorr++;
+        countwithacc++;
+        totcorrwithacc++;
+
+        if (Number.isInteger(totcorr / 10) == true && totcorr !== 0) {
+            let mess = document.getElementById("result").innerHTML;
+            let wordisl = ["Frábært!", "Koma svo!", "Flott!", "Ljómandi!", "Gott!"];
+            let rnd = Math.floor(Math.random() * wordisl.length);
+            document.getElementById("result").innerHTML = wordisl[rnd] + " " + mess + '<span id="numbset">' + totcorr + "</span> sentences!";
+            document.getElementById("messagearea").style.display = "block";
+            document.getElementById("mainarea").style.display = "none";
+            document.getElementById("butt12").style.display = "none";
+        }
+            }
+
+            const { data: { user } } = await supabaseClient.auth.getUser();
+
+            if (user) {
+                await savePracticeSession(countwithacc, totcorrwithacc, "B1");
+                await fetchAndDisplayHistory();
+            }
+
+            document.getElementById("totcount").innerHTML =
+            "Correct sentences: " + totcorrwithacc + "/" + countwithacc;
 }
-}
-document.getElementById("totcount").innerHTML = "Correct sentences: " + totcorr + "/" + count;
-}
+
 
 // Functions: Styling correct and wrong answers with verification
 
 function verif() {
-document.getElementById("verif").disabled = true;
-if (document.getElementById("timeng").innerHTML == '<button id="actb" onclick="activetime()">+time/place</button>') {
-document.getElementById("actb").remove();
-document.getElementById("timeng").innerHTML = '-';
-}
-var x = document.getElementById("subjice").value.toLowerCase();
-var y = document.getElementById("verbice").value.toLowerCase();
-var z = document.getElementById("objice").value.toLowerCase();
-var zt = document.getElementById("timice").value.toLowerCase();
-x = x.trimEnd();
-y = y.trimEnd();
-z = z.trimEnd();
-zt = zt.trimEnd();
+    document.getElementById("verif").disabled = true;
+    if (document.getElementById("timeng").innerHTML == '<button id="actb" onclick="activetime()">+time/place</button>') {
+        document.getElementById("actb").remove();
+        document.getElementById("timeng").innerHTML = '-';
+    }
+    const normalize = (s) => s.toLowerCase().trim().replace(/\s+/g, ' ');
+    var x = document.getElementById("subjice").value.toLowerCase();
+    var y = document.getElementById("verbice").value.toLowerCase();
+    var z = document.getElementById("objice").value.toLowerCase();
+    var zt = document.getElementById("timice").value.toLowerCase();
+    x = x.trimEnd();
+    y = y.trimEnd();
+    z = z.trimEnd();
+    zt = zt.trimEnd();
 
-if (adjsice == "" & varbut1 == 0) {
-if (x == dictsubj[randindex1][1].toLowerCase()) {
-document.getElementById("subjice").style.color = "#00ff00";
-document.getElementById("subjices").innerHTML = x;
-document.getElementById("subjices").style.color = "#00ff00";
-}
-if (x !== dictsubj[randindex1][1].toLowerCase()) {
-document.getElementById("subjice").style.color = "#ff0000";
-document.getElementById("subjices").innerHTML = dictsubj[randindex1][1] + ' <span class="phrase-c">← ' + casesubj + '</span>';
-document.getElementById("subjices").style.color = "#ff0000";
-}
-}
+    if (adjsice == "" & varbut1 == 0) {
+        if (x == dictsubj[randindex1][1].toLowerCase()) {
+            document.getElementById("subjice").style.color = "#00ff00";
+            document.getElementById("subjices").innerHTML = x;
+            document.getElementById("subjices").style.color = "#00ff00";
+        }
+        if (x !== dictsubj[randindex1][1].toLowerCase()) {
+            document.getElementById("subjice").style.color = "#ff0000";
+            document.getElementById("subjices").innerHTML = dictsubj[randindex1][1] + ' <span class="phrase-c">← ' + casesubj + '</span>';
+            document.getElementById("subjices").style.color = "#ff0000";
+        }
+    }
 
-if (adjsice == "" & varbut1 == 1) {
-document.getElementById("adjs").remove();
-if (x == dictsubj[randindex1][1].toLowerCase()) {
-document.getElementById("subjice").style.color = "#00ff00";
-document.getElementById("subjices").innerHTML = x;
-document.getElementById("subjices").style.color = "#00ff00";
-}
-if (x !== dictsubj[randindex1][1].toLowerCase()) {
-document.getElementById("subjice").style.color = "#ff0000";
-document.getElementById("subjices").innerHTML = dictsubj[randindex1][1] + ' <span class="phrase-c">← ' + casesubj + '</span>';
-document.getElementById("subjices").style.color = "#ff0000";
-}
-}
+    if (adjsice == "" & varbut1 == 1) {
+        document.getElementById("adjs").remove();
+        if (x == dictsubj[randindex1][1].toLowerCase()) {
+            document.getElementById("subjice").style.color = "#00ff00";
+            document.getElementById("subjices").innerHTML = x;
+            document.getElementById("subjices").style.color = "#00ff00";
+        }
+        if (x !== dictsubj[randindex1][1].toLowerCase()) {
+            document.getElementById("subjice").style.color = "#ff0000";
+            document.getElementById("subjices").innerHTML = dictsubj[randindex1][1] + ' <span class="phrase-c">← ' + casesubj + '</span>';
+            document.getElementById("subjices").style.color = "#ff0000";
+        }
+    }
 
-if (adjsice !== "") {
-let wholestr = adjsice + " " + dictsubj[randindex1][1].toLowerCase();
-if (x == wholestr) {
-document.getElementById("subjice").style.color = "#00ff00";
-document.getElementById("subjices").innerHTML = wholestr;
-document.getElementById("subjices").style.color = "#00ff00";
-} else {
-document.getElementById("subjice").style.color = "#ff0000";
-document.getElementById("subjices").innerHTML = wholestr + ' <span class="phrase-c">← ' + casesubj + '</span>';
-document.getElementById("subjices").style.color = "#ff0000";
-}
-}
+    if (adjsice !== "") {
+        let wholestr = adjsice + " " + dictsubj[randindex1][1].toLowerCase();
+        if (x == wholestr) {
+            document.getElementById("subjice").style.color = "#00ff00";
+            document.getElementById("subjices").innerHTML = wholestr;
+            document.getElementById("subjices").style.color = "#00ff00";
+        } else {
+            document.getElementById("subjice").style.color = "#ff0000";
+            document.getElementById("subjices").innerHTML = wholestr + ' <span class="phrase-c">← ' + casesubj + '</span>';
+            document.getElementById("subjices").style.color = "#ff0000";
+        }
+    }
 
-if (vbchoice == y.toLowerCase()) {
-document.getElementById("verbice").style.color = "#00ff00";
-document.getElementById("verbices").innerHTML = y;
-document.getElementById("verbices").style.color = "#00ff00";
-} else {
-document.getElementById("verbice").style.color = "#ff0000";
-document.getElementById("verbices").innerHTML = vbchoice;
-document.getElementById("verbices").style.color = "#ff0000";
-}
+    if (normalize(vbchoice) === normalize(y)) {
+        document.getElementById("verbice").style.color = "#00ff00";
+        document.getElementById("verbices").innerHTML = y;
+        document.getElementById("verbices").style.color = "#00ff00";
+    } else {
+        document.getElementById("verbice").style.color = "#ff0000";
+        document.getElementById("verbices").innerHTML = vbchoice;
+        document.getElementById("verbices").style.color = "#ff0000";
+    }
 
-if (adjoice == "" & varbut2 == 0) {
-if (z == dictobj[cx][1].toLowerCase()) {
-document.getElementById("objice").style.color = "#00ff00";
-document.getElementById("objices").innerHTML = z;
-document.getElementById("objices").style.color = "#00ff00";
-}
-if (z !== dictobj[cx][1].toLowerCase()) {
-document.getElementById("objice").style.color = "#ff0000";
-document.getElementById("objices").innerHTML = dictobj[cx][1] + ' <span class="phrase-c">← ' + dictobj[cx][2] + '</span>';
-document.getElementById("objices").style.color = "#ff0000";
-}
-}
+    if (adjoice == "" & varbut2 == 0) {
+        if (z == dictobj[cx][1].toLowerCase()) {
+            document.getElementById("objice").style.color = "#00ff00";
+            document.getElementById("objices").innerHTML = z;
+            document.getElementById("objices").style.color = "#00ff00";
+        }
+        if (z !== dictobj[cx][1].toLowerCase()) {
+            document.getElementById("objice").style.color = "#ff0000";
+            document.getElementById("objices").innerHTML = dictobj[cx][1] + ' <span class="phrase-c">← ' + dictobj[cx][2] + '</span>';
+            document.getElementById("objices").style.color = "#ff0000";
+        }
+    }
 
-if (adjoice == "" & varbut2 == 1) {
-document.getElementById("adjo").remove();
-if (z == dictobj[cx][1].toLowerCase()) {
-document.getElementById("objice").style.color = "#00ff00";
-document.getElementById("objices").innerHTML = z;
-document.getElementById("objices").style.color = "#00ff00";
-}
-if (z !== dictobj[cx][1].toLowerCase()) {
-document.getElementById("objice").style.color = "#ff0000";
-document.getElementById("objices").innerHTML = dictobj[cx][1] + ' <span class="phrase-c">← ' + dictobj[cx][2] + '</span>';
-document.getElementById("objices").style.color = "#ff0000";
-}
-}
+    if (adjoice == "" & varbut2 == 1) {
+        document.getElementById("adjo").remove();
+        if (z == dictobj[cx][1].toLowerCase()) {
+            document.getElementById("objice").style.color = "#00ff00";
+            document.getElementById("objices").innerHTML = z;
+            document.getElementById("objices").style.color = "#00ff00";
+        }
+        if (z !== dictobj[cx][1].toLowerCase()) {
+            document.getElementById("objice").style.color = "#ff0000";
+            document.getElementById("objices").innerHTML = dictobj[cx][1] + ' <span class="phrase-c">← ' + dictobj[cx][2] + '</span>';
+            document.getElementById("objices").style.color = "#ff0000";
+        }
+    }
 
-if (adjoice !== "") {
-let wholestr2 = adjoice + " " + dictobj[cx][1].toLowerCase();
-if (z == wholestr2) {
-document.getElementById("objice").style.color = "#00ff00";
-document.getElementById("objices").innerHTML = wholestr2;
-document.getElementById("objices").style.color = "#00ff00";
-} else {
-document.getElementById("objice").style.color = "#ff0000";
-document.getElementById("objices").innerHTML = wholestr2 + ' <span class="phrase-c">← ' + dictobj[cx][2] + '</span>';
-document.getElementById("objices").style.color = "#ff0000";
-}
-}
+    if (adjoice !== "") {
+        let wholestr2 = adjoice + " " + dictobj[cx][1].toLowerCase();
+        if (z == wholestr2) {
+            document.getElementById("objice").style.color = "#00ff00";
+            document.getElementById("objices").innerHTML = wholestr2;
+            document.getElementById("objices").style.color = "#00ff00";
+        } else {
+            document.getElementById("objice").style.color = "#ff0000";
+            document.getElementById("objices").innerHTML = wholestr2 + ' <span class="phrase-c">← ' + dictobj[cx][2] + '</span>';
+            document.getElementById("objices").style.color = "#ff0000";
+        }
+    }
 
-if (zt == vartimepleng) {
-    document.getElementById("timice").style.color = "#00ff00";
-    document.getElementById("timices").innerHTML = vartimepleng;
-    document.getElementById("timices").style.color = "#00ff00";
-} else if (zt !== vartimepleng & vartimepleng !== "") {
-    document.getElementById("timice").style.color = "#ff0000";
-    document.getElementById("timices").innerHTML = vartimepleng;
-    document.getElementById("timices").style.color = "#ff0000";
-} else if (zt !== vartimepleng & vartimepleng == "") {
-    document.getElementById("timice").style.color = "#ff0000";
-    document.getElementById("timices").innerHTML = vartimepleng;
-    document.getElementById("timices").style.color = "#ff0000";
-}
-if (document.getElementById("timeng").innerHTML == '-') {
-    document.getElementById("timices").innerHTML = '-';
-}
+    if (zt == vartimepleng) {
+        document.getElementById("timice").style.color = "#00ff00";
+        document.getElementById("timices").innerHTML = vartimepleng;
+        document.getElementById("timices").style.color = "#00ff00";
+    } else if (zt !== vartimepleng & vartimepleng !== "") {
+        document.getElementById("timice").style.color = "#ff0000";
+        document.getElementById("timices").innerHTML = vartimepleng;
+        document.getElementById("timices").style.color = "#ff0000";
+    } else if (zt !== vartimepleng & vartimepleng == "") {
+        document.getElementById("timice").style.color = "#ff0000";
+        document.getElementById("timices").innerHTML = vartimepleng;
+        document.getElementById("timices").style.color = "#ff0000";
+    }
+    if (document.getElementById("timeng").innerHTML == '-') {
+        document.getElementById("timices").innerHTML = '-';
+    }
 
-if (x == "" & y == "" & z == "" & zt == "") {
-document.getElementById("subjice").style.color = "#000000";
-document.getElementById("verbice").style.color = "#000000";
-document.getElementById("objice").style.color = "#000000";
-document.getElementById("timice").style.color = "#000000";
-document.getElementById("subjice").disabled = true;
-document.getElementById("verbice").disabled = true;
-document.getElementById("objice").disabled = true;
-document.getElementById("timice").disabled = true;
-document.getElementById("subjices").style.color = "#0000ff";
-document.getElementById("verbices").style.color = "#0000ff";
-document.getElementById("objices").style.color = "#0000ff";
-document.getElementById("timices").style.color = "#0000ff";
-}
+    if (x == "" & y == "" & z == "" & zt == "") {
+        document.getElementById("subjice").style.color = "#000000";
+        document.getElementById("verbice").style.color = "#000000";
+        document.getElementById("objice").style.color = "#000000";
+        document.getElementById("timice").style.color = "#000000";
+        document.getElementById("subjice").disabled = true;
+        document.getElementById("verbice").disabled = true;
+        document.getElementById("objice").disabled = true;
+        document.getElementById("timice").disabled = true;
+        document.getElementById("subjices").style.color = "#0000ff";
+        document.getElementById("verbices").style.color = "#0000ff";
+        document.getElementById("objices").style.color = "#0000ff";
+        document.getElementById("timices").style.color = "#0000ff";
+    }
 
-document.getElementById("gener").disabled = false;
+    document.getElementById("gener").disabled = false;
 }
 
 // Functions: Showning and hiding sections of the page
 
 function showinfo() {
-document.getElementById("info").style.display = "block";
-document.getElementById("about").style.display = "none";
-document.getElementById("previous").style.display = "none";
-document.getElementById("vocablistside").style.display = "none";
-document.getElementById("settings").style.display = "none";
+    document.getElementById("info").style.display = "block";
+    document.getElementById("about").style.display = "none";
+    document.getElementById("previous").style.display = "none";
+    document.getElementById("vocablistside").style.display = "none";
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("neistinn-auth-panel").style.display = "none";
 }
 
 function showsett() {
@@ -1038,6 +1080,7 @@ function showsett() {
     document.getElementById("previous").style.display = "none";
     document.getElementById("vocablistside").style.display = "none";
     document.getElementById("settings").style.display = "block";
+    document.getElementById("neistinn-auth-panel").style.display = "none";
 }
 
 function showvocab() {
@@ -1046,28 +1089,40 @@ function showvocab() {
     document.getElementById("about").style.display = "none";
     document.getElementById("previous").style.display = "none";
     document.getElementById("settings").style.display = "none";
+    document.getElementById("neistinn-auth-panel").style.display = "none";
 }
 
 function showabout() {
-document.getElementById("info").style.display = "none";
-document.getElementById("about").style.display = "block";
-document.getElementById("previous").style.display = "none";
-document.getElementById("vocablistside").style.display = "none";
-document.getElementById("settings").style.display = "none";
+    document.getElementById("info").style.display = "none";
+    document.getElementById("about").style.display = "block";
+    document.getElementById("previous").style.display = "none";
+    document.getElementById("vocablistside").style.display = "none";
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("neistinn-auth-panel").style.display = "none";
 }
 
 function showprev() {
-document.getElementById("info").style.display = "none";
-document.getElementById("about").style.display = "none";
-document.getElementById("previous").style.display = "block";
-document.getElementById("vocablistside").style.display = "none";
-document.getElementById("settings").style.display = "none";
+    document.getElementById("info").style.display = "none";
+    document.getElementById("about").style.display = "none";
+    document.getElementById("previous").style.display = "block";
+    document.getElementById("vocablistside").style.display = "none";
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("neistinn-auth-panel").style.display = "none";
+}
+
+function showlogin() {
+    document.getElementById("info").style.display = "none";
+    document.getElementById("about").style.display = "none";
+    document.getElementById("previous").style.display = "none";
+    document.getElementById("vocablistside").style.display = "none";
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("neistinn-auth-panel").style.display = "block";
 }
 
 function clmess() {
-document.getElementById("messagearea").style.display = "none";
-document.getElementById("mainarea").style.display = "block";
-document.getElementById("butt12").style.display = "block";
+    document.getElementById("messagearea").style.display = "none";
+    document.getElementById("mainarea").style.display = "block";
+    document.getElementById("butt12").style.display = "block";
 }
 
 // Functions: Vocabulary generation
@@ -1077,171 +1132,164 @@ function genvocab() {
         let v = dictsubjnom[a].slice();
         let p = v[0].slice();
         if (p.slice(-7) == " - minn") {
-        p = p.slice(0,-7);
+            p = p.slice(0,-7);
         } else if (p.slice(-7) == " - þinn") {
-        p = p.slice(0,-7);
+            p = p.slice(0,-7);
         }
         if (p.slice(-6) == " (ft.)") {
-        p = p.slice(0,-6);
+            p = p.slice(0,-6);
         }
         if (p.slice(-4) == "+gr.") {
-        p = p.slice(0,-4);
+            p = p.slice(0,-4);
         }
         vocabularylist.push([p, "", "nominal"]);
+    }
+    for (let a = 0; a < dictsubjnom.length; a++) {
+        if (dictsubjnom[a][3] == "adj") {
+            let v = dictsubjnom[a][5].slice();
+            vocabularyf.push(v);
         }
-        for (let a = 0; a < dictsubjnom.length; a++) {
-            if (dictsubjnom[a][3] == "adj") {
-                let v = dictsubjnom[a][5].slice();
-                vocabularyf.push(v);
-            }
+    }
+    for (let a = 0; a < dictobj.length; a++) {
+        if (dictobj[a][3] == "adj") {
+            let v = dictobj[a][5].slice();
+            vocabularyf.push(v);
         }
-      for (let a = 0; a < dictobj.length; a++) {
-          if (dictobj[a][3] == "adj") {
-              let v = dictobj[a][5].slice();
-              vocabularyf.push(v);
+    }
+    vocabularyf = [...new Set(vocabularyf.flat())];
+    for (let a = 0; a < vocabularyf.length; a++) {
+        vocabularylist.push([vocabularyf[a], "", "adjective"]);
+    }
+    for (let a = 0; a < dictverbnom.length; a++) {
+        let v = dictverbnom[a].slice();
+        let p = v[0].slice();
+        vocabularylist.push([p, "", "verb"]);
+    }
+    for (let a = 0; a < dictverbacc.length; a++) {
+        let v = dictverbacc[a].slice();
+        let p = v[0].slice();
+        vocabularylist.push([p, "", "verb"]);
+    }
+    for (let a = 0; a < modalverbs.length; a++) {
+        let v = modalverbs[a].slice();
+        let p = v[0].slice();
+        vocabularylist.push([p, "", "verb"]);
+    }
+    for (let a = 0; a < prestime.length; a++) {
+        let v = prestime[a].slice();
+        let p = v[0].slice();
+        let p1 = "";
+        if (p.slice(-7) == " - minn") {
+            p = p.slice(0,-7);
+        } else if (p.slice(-7) == " - þinn") {
+            p = p.slice(0,-7);
         }
-      }
-      vocabularyf = [...new Set(vocabularyf.flat())];
-      for (let a = 0; a < vocabularyf.length; a++) {
-         vocabularylist.push([vocabularyf[a], "", "adjective"]);
-       }
-      // if (p.includes == "%") {
-       //    p1 = p.substring(p.lastIndexOf("%"));
-       //    p = p.substring(0,p.lastIndexOf("%"));
-       //    vocabularylist.push([p1, "", "adjective"]);
-       // }
-        for (let a = 0; a < dictverbnom.length; a++) {
-            let v = dictverbnom[a].slice();
-            let p = v[0].slice();
-            vocabularylist.push([p, "", "verb"]);
+        if (p.slice(-6) == " (ft.)") {
+            p = p.slice(0,-6);
         }
-        for (let a = 0; a < dictverbacc.length; a++) {
-            let v = dictverbacc[a].slice();
-            let p = v[0].slice();
-            vocabularylist.push([p, "", "verb"]);
+        if (p.slice(-4) == "+gr.") {
+            p = p.slice(0,-4);
         }
-        for (let a = 0; a < modalverbs.length; a++) {
-           let v = modalverbs[a].slice();
-           let p = v[0].slice();
-           vocabularylist.push([p, "", "verb"]);
-       }
-       for (let a = 0; a < prestime.length; a++) {
-           let v = prestime[a].slice();
-           let p = v[0].slice();
-           let p1 = "";
-           if (p.slice(-7) == " - minn") {
-               p = p.slice(0,-7);
-           } else if (p.slice(-7) == " - þinn") {
-               p = p.slice(0,-7);
-           }
-           if (p.slice(-6) == " (ft.)") {
-               p = p.slice(0,-6);
-           }
-           if (p.slice(-4) == "+gr.") {
-               p = p.slice(0,-4);
-           }
-           vocabularylist.push([p, "", "nominal"]);
-       }
-       for (let a = 0; a < pasttime.length; a++) {
-           let v = pasttime[a].slice();
-           let p = v[0].slice();
-           if (p.slice(-7) == " - minn") {
-               p = p.slice(0,-7);
-           } else if (p.slice(-7) == " - þinn") {
-               p = p.slice(0,-7);
-           }
-           if (p.slice(-6) == " (ft.)") {
-               p = p.slice(0,-6);
-           }
-           if (p.slice(-4) == "+gr.") {
-               p = p.slice(0,-4);
-           }
-           vocabularylist.push([p, "", "nominal"]);
-       }
-       for (let a = 0; a < presprtime.length; a++) {
-           let v = presprtime[a].slice();
-           let p = v[0].slice();
-           if (p.slice(-7) == " - minn") {
-               p = p.slice(0,-7);
-           } else if (p.slice(-7) == " - þinn") {
-               p = p.slice(0,-7);
-           }
-           if (p.slice(-6) == " (ft.)") {
-               p = p.slice(0,-6);
-           }
-           if (p.slice(-4) == "+gr.") {
-               p = p.slice(0,-4);
-           }
-           vocabularylist.push([p, "", "nominal"]);
-       }
-       for (let a = 0; a < pastprtime.length; a++) {
-           let v = pastprtime[a].slice();
-           let p = v[0].slice();
-           if (p.slice(-7) == " - minn") {
-               p = p.slice(0,-7);
-           } else if (p.slice(-7) == " - þinn") {
-               p = p.slice(0,-7);
-           }
-           if (p.slice(-6) == " (ft.)") {
-               p = p.slice(0,-6);
-           }
-           if (p.slice(-4) == "+gr.") {
-               p = p.slice(0,-4);
-           }
-           vocabularylist.push([p, "", "nominal"]);
-       }
-       for (let a = 0; a < futtime.length; a++) {
-           let v = futtime[a].slice();
-           let p = v[0].slice();
-           if (p.slice(-7) == " - minn") {
-               p = p.slice(0,-7);
-           } else if (p.slice(-7) == " - þinn") {
-               p = p.slice(0,-7);
-           }
-           if (p.slice(-6) == " (ft.)") {
-               p = p.slice(0,-6);
-           }
-           if (p.slice(-4) == "+gr.") {
-               p = p.slice(0,-4);
-           }
-           vocabularylist.push([p, "", "nominal"]);
-       }
-        for (let a = 0; a < dictobj.length; a++) {
-            let v = dictobj[a].slice();
-            let p = v[0].slice();
-            let q = "";
-            if (p.includes("%") == true) {
-                q = p.slice(p.indexOf("%")+1);
-                p = p.slice(0,p.indexOf("%"));
-            }
-            if (p.slice(-7) == " - minn") {
-                p = p.slice(0,-7);
-            } else if (p.slice(-7) == " - þinn") {
-                p = p.slice(0,-7);
-            }
-            if (p.slice(-6) == " (ft.)") {
-                p = p.slice(0,-6);
-            }
-            if (p.slice(-4) == "+gr.") {
-                p = p.slice(0,-4);
-            }
-            vocabularylist.push([p, "", "nominal"]);
-            if (q !== "") {
+        vocabularylist.push([p, "", "nominal"]);
+    }
+    for (let a = 0; a < pasttime.length; a++) {
+        let v = pasttime[a].slice();
+        let p = v[0].slice();
+        if (p.slice(-7) == " - minn") {
+            p = p.slice(0,-7);
+        } else if (p.slice(-7) == " - þinn") {
+            p = p.slice(0,-7);
+        }
+        if (p.slice(-6) == " (ft.)") {
+            p = p.slice(0,-6);
+        }
+        if (p.slice(-4) == "+gr.") {
+            p = p.slice(0,-4);
+        }
+        vocabularylist.push([p, "", "nominal"]);
+    }
+    for (let a = 0; a < presprtime.length; a++) {
+        let v = presprtime[a].slice();
+        let p = v[0].slice();
+        if (p.slice(-7) == " - minn") {
+            p = p.slice(0,-7);
+        } else if (p.slice(-7) == " - þinn") {
+            p = p.slice(0,-7);
+        }
+        if (p.slice(-6) == " (ft.)") {
+            p = p.slice(0,-6);
+        }
+        if (p.slice(-4) == "+gr.") {
+            p = p.slice(0,-4);
+        }
+        vocabularylist.push([p, "", "nominal"]);
+    }
+    for (let a = 0; a < pastprtime.length; a++) {
+        let v = pastprtime[a].slice();
+        let p = v[0].slice();
+        if (p.slice(-7) == " - minn") {
+            p = p.slice(0,-7);
+        } else if (p.slice(-7) == " - þinn") {
+            p = p.slice(0,-7);
+        }
+        if (p.slice(-6) == " (ft.)") {
+            p = p.slice(0,-6);
+        }
+        if (p.slice(-4) == "+gr.") {
+            p = p.slice(0,-4);
+        }
+        vocabularylist.push([p, "", "nominal"]);
+    }
+    for (let a = 0; a < futtime.length; a++) {
+        let v = futtime[a].slice();
+        let p = v[0].slice();
+        if (p.slice(-7) == " - minn") {
+            p = p.slice(0,-7);
+        } else if (p.slice(-7) == " - þinn") {
+            p = p.slice(0,-7);
+        }
+        if (p.slice(-6) == " (ft.)") {
+            p = p.slice(0,-6);
+        }
+        if (p.slice(-4) == "+gr.") {
+            p = p.slice(0,-4);
+        }
+        vocabularylist.push([p, "", "nominal"]);
+    }
+    for (let a = 0; a < dictobj.length; a++) {
+        let v = dictobj[a].slice();
+        let p = v[0].slice();
+        let q = "";
+        if (p.includes("%") == true) {
+            q = p.slice(p.indexOf("%")+1);
+            p = p.slice(0,p.indexOf("%"));
+        }
+        if (p.slice(-7) == " - minn") {
+            p = p.slice(0,-7);
+        } else if (p.slice(-7) == " - þinn") {
+            p = p.slice(0,-7);
+        }
+        if (p.slice(-6) == " (ft.)") {
+            p = p.slice(0,-6);
+        }
+        if (p.slice(-4) == "+gr.") {
+            p = p.slice(0,-4);
+        }
+        vocabularylist.push([p, "", "nominal"]);
+        if (q !== "") {
             vocabularylist.push([q, "", "adjective"]);
-            }
         }
+    }
 
 
-        const seen = new Map();
-        const uniqueList = vocabularylist.filter(item => {
-            const key = `${item[0]}|${item[1]}`;
-            return seen.has(key) ? false : seen.set(key, true);
-        });
-        vocabularylist.length = 0;
-        vocabularylist.push(...uniqueList);
+    const seen = new Map();
+    const uniqueList = vocabularylist.filter(item => {
+        const key = `${item[0]}|${item[1]}`;
+        return seen.has(key) ? false : seen.set(key, true);
+    });
+    vocabularylist.length = 0;
+    vocabularylist.push(...uniqueList);
     vocabularylist.sort((a, b) => a[0].localeCompare(b[0]));
-//    let fslr = JSON.stringify(vocabularylist);
-//    console.log(fslr);
     for (let a = 0; a < vocabularylist.length; a++) {
         vocabularylist[a][1] = vocabtrans[a];
     }
@@ -1249,7 +1297,7 @@ function genvocab() {
         var table = document.getElementById("sbroc");
         var row = table.insertRow(c);
         if (Number.isInteger(c / 2) == true) {
-          row.style.backgroundColor = "#dddddd";
+            row.style.backgroundColor = "#dddddd";
         }
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -1263,7 +1311,7 @@ function genvocab() {
         } else if (vocabularylist[c][2] == "verb") {
             cell1.innerHTML = '<p class="phrase-v">' + vocabularylist[c][0].charAt(0).toLowerCase() + vocabularylist[c][0].substring(1) + "</p>";
         } else {
-        cell1.innerHTML = "<p>" + vocabularylist[c][0].charAt(0).toLowerCase() + vocabularylist[c][0].substring(1) + "</p>";
+            cell1.innerHTML = "<p>" + vocabularylist[c][0].charAt(0).toLowerCase() + vocabularylist[c][0].substring(1) + "</p>";
         }
         cell2.innerHTML = "<p>" + vocabularylist[c][1] + "</p>";
         cell3.innerHTML = "<p>" + vocabularylist[c][2] + "</p>";
@@ -1278,4 +1326,191 @@ function genvocab() {
     cell1a.innerHTML = "<p><b>Icelandic lemma</b></p>";
     cell2a.innerHTML = "<p><b>English</b></p>";
     cell3a.innerHTML = "<p><b>Type</b></p>";
+}
+
+// Signups, logins, logouts and information transfer to a database
+
+async function handleSignUp(email, password, firstName, lastName, language) {
+    const { data, error } = await supabase.auth.signUp({ email, password, firstName, lastName, language });
+    if (error) {
+        alert("Error creating account: " + error.message);
+    } else {
+        alert("Account created successfully! Check your email for a confirmation link.");
+    }
+}
+
+async function handleLogIn(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+        alert("Login failed: " + error.message);
+    } else {
+        console.log("Welcome back!", data.user.email);
+    }
+}
+
+async function handleLogOut() {
+    await supabaseClient.auth.signOut();
+    totcorrwithacc = 0;
+    countwithacc = 0;
+    document.getElementById("totcount").innerHTML =
+    "Correct sentences: " + totcorrwithacc + "/" + countwithacc;
+}
+
+async function savePracticeSession(attemptedCount, correctCount, levelChosen) {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    if (!user) {
+        return;
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+
+    const { data: existingRows, error: fetchError } = await supabaseClient
+    .from('user_progress')
+    .select('sentences_attempted, sentences_correct')
+    .eq('user_id', user.id)
+    .eq('created_at', today)
+    .eq('difficulty_level', levelChosen);
+
+    if (fetchError) {
+        console.error("Error looking up existing records:", fetchError.message);
+        return;
+    }
+
+    let totalAttempted = attemptedCount;
+    let totalCorrect = correctCount;
+
+    const { error: upsertError } = await supabaseClient
+    .from('user_progress')
+    .upsert({
+        user_id: user.id,
+        created_at: today,
+        sentences_attempted: totalAttempted,
+        sentences_correct: totalCorrect,
+        difficulty_level: levelChosen
+    }, {
+        onConflict: 'user_id,created_at,difficulty_level'
+    });
+
+    if (upsertError) {
+        console.error("Failed to back up data:", upsertError.message);
+    }
+}
+
+document.getElementById('btn-action-startreg').addEventListener('click', async () => {
+    document.getElementById('fstn').style.display = "block";
+    document.getElementById('lstn').style.display = "block";
+    document.getElementById('fstl').style.display = "block";
+    document.getElementById('btn-action-signup').disabled = false;
+});
+
+document.getElementById('btn-action-signup').addEventListener('click', async () => {
+    const email = document.getElementById('input-auth-email').value;
+    const password = document.getElementById('input-auth-password').value;
+    const fstname = document.getElementById('input-auth-name').value;
+    const lstname = document.getElementById('input-auth-surname').value;
+    const fstlang = document.getElementById('input-auth-lang').value;
+
+    if (!email || !password || !fstname || !lstname || !fstlang) return alert("Please fill out all the required fields.");
+
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+            data: {
+                first_name: fstname,
+                last_name: lstname,
+                mother_tongue: fstlang
+            }
+        }
+    });
+
+    if (error) {
+        alert("Signup Error: " + error.message);
+    } else {
+        alert("Success! Please check your email inbox for a confirmation link to activate your profile.");
+    }
+});
+
+document.getElementById('btn-action-login').addEventListener('click', async () => {
+    const email = document.getElementById('input-auth-email').value;
+    const password = document.getElementById('input-auth-password').value;
+
+    if (!email || !password) return alert("Please enter both email and password.");
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    if (error) {
+        alert("Login Error: " + error.message);
+    }
+});
+
+document.getElementById('btn-action-logout').addEventListener('click', async () => {
+    await supabaseClient.auth.signOut();
+});
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+    const loggedOutView = document.getElementById('view-logged-out');
+    const loggedInView = document.getElementById('view-logged-in');
+
+    if (session) {
+        loggedOutView.style.display = 'none';
+        loggedInView.style.display = 'block';
+        document.getElementById('display-user-email').innerText = session.user.email;
+
+        fetchAndDisplayHistory();
+    } else {
+        loggedOutView.style.display = 'block';
+        loggedInView.style.display = 'none';
+
+        totcorrwithacc = 0;
+        countwithacc = 0;
+        document.getElementById("totcount").innerHTML =
+        "Correct sentences: " + totcorrwithacc + "/" + countwithacc;
+    }
+});
+
+async function fetchAndDisplayHistory() {
+    const listElement = document.getElementById('history-items-list');
+    listElement.innerHTML = '<li>Loading statistics...</li>';
+
+    const { data, error } = await supabaseClient
+    .from('user_progress')
+    .select('created_at, sentences_attempted, sentences_correct, difficulty_level')
+    .order('created_at', { ascending: false });
+
+    if (error) {
+        listElement.innerHTML = '<li>Could not load your history metrics.</li>';
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        listElement.innerHTML = '<li>No saved sessions found yet. Start practicing!</li>';
+        totcorrwithacc = 0;
+        countwithacc = 0;
+        return;
+    }
+
+    listElement.innerHTML = '';
+
+    const tzOffset = (new Date()).getTimezoneOffset() * 60000;
+   const todayStr = (new Date(Date.now() - ((new Date()).getTimezoneOffset() * 60000))).toISOString().split('T')[0];
+
+    totcorrwithacc = 0;
+    countwithacc = 0;
+
+        data.forEach(sessionRow => {
+            const formattedDate = new Date(sessionRow.created_at).toLocaleDateString();
+            const listItem = document.createElement('li');
+            listItem.style.marginBottom = '4px';
+
+            listItem.innerText = `${formattedDate} [Level ${sessionRow.difficulty_level}]: Correct ${sessionRow.sentences_correct}/${sessionRow.sentences_attempted}`;
+            listElement.appendChild(listItem);
+
+            const rowDateStr = new Date(sessionRow.created_at).toISOString().split('T')[0];
+
+            if (rowDateStr === todayStr && sessionRow.difficulty_level === "B1") {
+                totcorrwithacc = sessionRow.sentences_correct;
+                countwithacc = sessionRow.sentences_attempted;
+            }
+    });
 }

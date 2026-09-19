@@ -716,7 +716,11 @@ function generate() {
         document.getElementById("objeng").innerHTML = '<span class="phrase-n">' + c.substring(0,c.lastIndexOf("%")) + '</span> <span class="phrase-a">' + c.substring(c.lastIndexOf("%")+1) + '</span>';
     }
 
+    if (document.getElementById("messagearea").style.display !== "none") {
+    document.getElementById("verif").disabled = true;
+    } else {
     document.getElementById("verif").disabled = false;
+    }
     document.getElementById("subjice").disabled = false;
     document.getElementById("verbice").disabled = false;
     document.getElementById("objice").disabled = false;
@@ -894,6 +898,7 @@ async function chronol() {
         cell11.style.fontWeight = "bold";
 
         totcorr++;
+        document.getElementById("totcount").innerHTML = "Correct sentences: " + totcorrwithacc + "/" + countwithacc;
         countwithacc++;
         totcorrwithacc++;
 
@@ -904,7 +909,7 @@ async function chronol() {
             document.getElementById("result").innerHTML = wordisl[rnd] + " " + mess + '<span id="numbset">' + totcorr + "</span> sentences!";
             document.getElementById("messagearea").style.display = "block";
             document.getElementById("mainarea").style.display = "none";
-            document.getElementById("butt12").style.display = "none";
+            document.getElementById("verif").disabled = true;
         }
             }
 
@@ -1122,7 +1127,7 @@ function showlogin() {
 function clmess() {
     document.getElementById("messagearea").style.display = "none";
     document.getElementById("mainarea").style.display = "block";
-    document.getElementById("butt12").style.display = "block";
+    document.getElementById("verif").disabled = false;
 }
 
 // Functions: Vocabulary generation

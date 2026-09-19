@@ -1,21 +1,74 @@
 <!DOCTYPE html>
-<html lang="is">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neistinn 1.1.6 - Mirko Garofalo</title>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-<div class="containerx">
-<div class="container">
-<table id="mainline"><tbody><tr><td><img id="iconmain" src="neistinn.png"></img></td><td><h1>Neistinn</h1></td><td><h2 align="right">Sentence building trainer for learners of Icelandic<br>A1-B1 level</h2></td></tr></tbody></table>
-<hr></hr>
-<div id="mainarea"><table id="maintab"><tbody><tr><td><b>Subject</b></td><td><b>Verb</b></td><td><b>Object</b></td><td><b>Time/place</b></td></tr><tr><td><p id="subjeng">-</p></td><td><p id="verbeng">-</p></td><td><p id="objeng">-</p></td><td><p id="timeng">-</p></td></tr><tr><td><input type=text id="subjice" disabled></td><td><input type=text id="verbice" disabled></td><td><input type=text id="objice" disabled></td><td><input type=text id="timice" disabled></td></tr><tr><td><p id="subjices">-</p></td><td><p id="verbices">-</p></td><td><p id="objices">-</p></td><td><p id="timices">-</p></td></tr></tbody></table></div>
-<div id=butt12><p align=center><button id="gener" onclick="generate()">Generate a sentence</button> <button id="verif" onclick="verif()" disabled>Verify</button></p></div><div id="messagearea" style="display:none"><p align=center><img src="celeb.gif" width="250px"></p><p align=center id="result">You wrote correctly </p><button id="clmess" onclick="clmess()">Close</button></div></div>
-<div class="side" id="textchron">
-<div id="about" style="display:none"><h2>About</h2><p class="parag"><img id="mig" src="mig.jpg">Mirko Garofalo is an adjunct lecturer at the University of Iceland and a Doctor in Icelandic linguistics. His main field of interest is syntax, language technology and L2 acquisition, in particular in relation to Icelandic. Mirko has been teaching Icelandic as a second language at beginner, intermediate and advanced level for over a decade at the University of Iceland.</p><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
-<div id="info" style="display:none"><h2>Instructions</h2><p class="parag"><i>Neistinn</i> (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb, object and information about time or place. The app generates a sequence of words in their default form (e.g. nominative singular for nouns, infinitive for verbs, etc.) which need to be inflected.<br><br>To start, click on the button <i>Generate a sentence</i>. A randomized subject, main verb and object will appear. The user can also ask the generator to add an adjective to the subject or the object when the button <span id="adjno">+adj</span> appears. Optionally, it is possible to add to the sentence a phrase expressing time or location by clicking on <span id="adjno">+time/place</span>. At that point, the user can type in the text boxes the correct Icelandic form of the subject, the verb, the object and the time/place expression if it is enabled, and click on <i>Verify</i> to check whether the answer given is correct.<br><br>The items correctly typed will be marked in green and the incorrect ones in red. If no answer is given, the items will be marked in blue. The examples previously generated will be displayed on the side panel. The previous examples where the answer was incorrect are marked in red.<br><br>The various components of the sentences are marked with different colors and indications are given e.g. on which tense needs to be used, or whether there is an article attached to the noun, or whether the noun must be in the plural etc. A comprehensive list is shown here:<br><br>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon"></div>
+        <span>Íslenskutól</span>
+      </div>
+
+      <div class="menu-label">Menu</div>
+
+      <nav class="nav">
+        <a href="#" class="active" onclick="showabout()">
+          <span class="nav-icon">?</span>
+          <span>About</span>
+        </a>
+        <a href="#" class="active" onclick="showinfo()">
+          <span class="nav-icon">☑</span>
+          <span>Instructions</span>
+        </a>
+        <a href="#" class="active" onclick="showvocab()">
+          <span class="nav-icon">🕮</span>
+          <span>Vocabulary</span>
+        </a>
+        <a href="#" class="active" onclick="showsett()">
+          <span class="nav-icon">⚙</span>
+          <span>Settings</span>
+        </a>
+        <a href="#" class="active" onclick="showlogin()">
+          <span class="nav-icon">👤</span>
+          <span>User login</span>
+        </a>
+        <a href="https://islenskutol.is" class="active">
+          <span class="nav-icon">⌂</span>
+          <span>Homepage</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <strong>Any errors?</strong><br />
+       Please contact mig@hi.is if you find any error.
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Sentence building trainer - Level A1-B1</div>
+          <h1>Neistinn v1.1.6 <span><img src="neistinn.png" width=62 height=62></span></h1>
+        </div>
+        <div class="profile">
+          <div class="avatar"><img id="mig" src="mig.jpg"></div>
+          <span>Author: Mirko Garofalo (mig@hi.is)</span>
+        </div>
+      </header>
+      
+       <section class="dialogwin" id="messagearea"><div align=center><p align=center><img align=center src="celeb.gif" width="200px"></p><p align=center><span id="result">You wrote correctly </span><button class="menubutton" id="clmess" onclick="clmess()">Close</button></p>    </div>  </section>
+      <section class="dialogwin" id="mainarea"><div><table id="maintab"><tbody><tr><td><b>Subject</b></td><td><b>Verb</b></td><td><b>Object</b></td><td><b>Time/place</b></td></tr><tr><td><p id="subjeng">-</p></td><td><p id="verbeng">-</p></td><td><p id="objeng">-</p></td><td><p id="timeng">-</p></td></tr><tr><td><input type=text id="subjice" disabled></td><td><input type=text id="verbice" disabled></td><td><input type=text id="objice" disabled></td><td><input type=text id="timice" disabled></td></tr><tr><td><p id="subjices">-</p></td><td><p id="verbices">-</p></td><td><p id="objices">-</p></td><td><p id="timices">-</p></td></tr></tbody></table></div></section>
+      <section class="menubar" id="buttonsmain"><button class="menubutton" id="gener" onclick="generate()">Generate a sentence</button> <button class="menubutton" id="verif" onclick="verif()" disabled>Verify</button><span id="totcount">Correct sentences: 0/0</span></section>
+<section class="dialogwin" id="textchron"><div class="chr" id="previous"><h2 id="tit">Previous sentences</h2>
+<table id="chron"><tbody></tbody></table></div><div id="about" style="display:none"><h2>About</h2><p class="parag"><img id="mig2" src="mig.jpg">Mirko Garofalo is an adjunct lecturer at the University of Iceland and a Doctor in Icelandic linguistics. His main field of interest is syntax, language technology and L2 acquisition, in particular in relation to Icelandic. Mirko has been teaching Icelandic as a second language at beginner, intermediate and advanced level for over a decade at the University of Iceland.</p><br><button class="menubutton" onclick="showprev()">Close</button></div>
+<div id="info" style="display:none"><h2>Instructions</h2><p class="parag"><i>Neistinn</i> (in English ‘the spark’) trains learners of Icelandic to build simple sentences composed of subject, main verb, object and information about time or place. The app generates a sequence of words in their default form (e.g. nominative singular for nouns, infinitive for verbs, etc.) which need to be inflected.<br><br>To start, click on the button <i>Generate a sentence</i>. A randomized subject, main verb and object will appear. The user can also ask the generator to add an adjective to the subject or the object when the button <span id="adjno2">+adj</span> appears. Optionally, it is possible to add to the sentence a phrase expressing time or location by clicking on <span id="adjno2">+time/place</span>. At that point, the user can type in the text boxes the correct Icelandic form of the subject, the verb, the object and the time/place expression if it is enabled, and click on <i>Verify</i> to check whether the answer given is correct.<br><br>The items correctly typed will be marked in green and the incorrect ones in red. If no answer is given, the items will be marked in blue. The examples previously generated will be displayed on the side panel. The previous examples where the answer was incorrect are marked in red.<br><br>The various components of the sentences are marked with different colors and indications are given e.g. on which tense needs to be used, or whether there is an article attached to the noun, or whether the noun must be in the plural etc. A comprehensive list is shown here:<br><br>
 <b>Colors</b><br><br>
 <span class="phrase-n">hundur</span> This box type is used for nouns and pronouns<br>
 <span class="phrase-a">gamall</span> This box type is used for adjectives<br>
@@ -28,17 +81,13 @@
 +GR. = with article (greinir)<br>
 (NT.) = present tense (nútíð)<br>
 (ÞT.) = past tense (þátíð)<br>
-(S.NT.) = present progressive (samsett nútíð), e.g. <i>Ég er að...</i><br>
-(S.ÞT.) = past progressive (samsett þátíð), e.g. <i>Ég var að...</i><br>
 NF. = nominative (nefnifall)<br>
 ÞF. = accusative (þolfall)<br>
 ÞGF. = dative (þágufall)<br>
 EF. = genitive (eignarfall)<br><br>
-<p class="links" onclick="showprev()"><u>Close</u></p></div>
-<div id="vocablistside" style="display:none"><h2>Vocabulary list</h2><table id="sbroc"></table><br><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
-<div id="settings" style="display:none"><h2>Settings</h2><p class="parag">Please note that this section of the application has not been implemented yet. By default, level A1 and A2 vocabulary will be active, but the user can choose to lower the vocabulary level, choose a specific single level to train, or activate them all.<br><br>Level:<br><br><input type="checkbox" id="a1" name="a1" value="a1">A1<br><input type="checkbox" id="a2" name="a2" value="a2">A2<br><input type="checkbox" id="b1" name="b1" value="b1">B1<br></p><br><p class="links" onclick="showprev()"><u>Close</u></p></div>
-<div id="previous"> <h2 id="tit">Previous sentences</h2>
-<table id="chron"><tbody></tbody></table></div>
+<br><button class="menubutton" onclick="showprev()">Close</button></div>
+<div id="vocablistside" style="display:none"><h2>Vocabulary list</h2><table id="sbroc"></table><br><br><br><button class="menubutton" onclick="showprev()">Close</button></div>
+<div id="settings" style="display:none"><h2>Settings</h2><p class="parag">Please note that this section of the application has not been implemented yet. By default, level A1 and A2 vocabulary will be active, but the user can choose to lower the vocabulary level, choose a specific single level to train, or activate them all.<br><br>Level:<br><br><input type="checkbox" id="a1" name="a1" value="a1">A1<br><input type="checkbox" id="a2" name="a2" value="a2">A2<br><input type="checkbox" id="b1" name="b1" value="b1">B1<br></p><br><button class="menubutton" onclick="showprev()">Close</button></div>
 <div id="neistinn-auth-panel" style="display:none">
   <div id="view-logged-out">
     <h3 style="margin-top: 0;">Log in</h3>
@@ -52,8 +101,8 @@ EF. = genitive (eignarfall)<br><br>
       <p id="fstl" style="display: none;">First language:* <input type="input" id="input-auth-lang" placeholder="Your first language" style="width: 50%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px;"></p>
     </div>
 
-    <table><tr><td><button id="btn-action-login">Log In</button></td><td><button id="btn-action-startreg" style="margin-left: 80px;">Sign up</button></td><td><button id="btn-action-signup" disabled>Save</button></td></tr></table>
-     <p class="links" onclick="showprev()"><u>Close</u></p>
+    <table><tr><td><button class="menubutton" id="btn-action-login">Log In</button></td><td><button class="menubutton" id="btn-action-startreg" style="margin-left: 80px;">Sign up</button></td><td><button class="menubutton" id="btn-action-signup" disabled>Save</button></td></tr></table>
+     <button class="menubutton" onclick="showprev()">Close</button>
   </div>
 
   <div id="view-logged-in" style="display: none;">
@@ -67,15 +116,17 @@ EF. = genitive (eignarfall)<br><br>
       </ul>
     </div>
 
-    <button id="btn-action-logout" style="margin-top: 15px; padding: 6px 12px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Log Out</button>
-    <p class="links" onclick="showprev()"><u>Close</u></p>
+    <button class="menubutton" id="btn-action-logout" style="margin-top: 15px; padding: 6px 12px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Log Out</button>
+    <button class="menubutton" onclick="showprev()">Close</button>
   </div>
 </div>
-</div></div>
-<div class="containerx">
-<div class="container"><table><tbody><tr><td><p>© Mirko Garofalo 2026 (mig@hi.is) - Ver. 1.1.5</p></td><td><p class="links" onclick="showvocab()" align=center>Vocabulary</p></td><td><p class="links" onclick="showsett()" align=center>Settings</p></td><td><p class="links" onclick="showabout()" align=right>About</p></td><td><p class="links" onclick="showinfo()" align=right>Instructions</p></td><td><p class="links" onclick="showlogin()" align=right>Login</p></td></tr></tbody></table></div>
-<div class="side"><table><tr><td><p id="totcount">Correct sentences: </p></td></tr></table></div></div>
-<script type="text/javascript" src="script.js" defer></script>
-</body>
-</html>
+</section>
 
+
+
+ </section>       
+    </main>
+  </div>
+</body>
+<script src="script.js"></script>
+</html>
